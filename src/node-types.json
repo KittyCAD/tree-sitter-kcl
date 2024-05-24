@@ -12,7 +12,7 @@
           "named": true
         },
         {
-          "type": "int",
+          "type": "number",
           "named": true
         }
       ]
@@ -43,11 +43,11 @@
     "named": false
   },
   {
-    "type": "int",
-    "named": true
-  },
-  {
     "type": "let",
     "named": false
+  },
+  {
+    "type": "number",
+    "named": true
   }
 ]

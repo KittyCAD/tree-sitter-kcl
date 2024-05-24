@@ -2,13 +2,14 @@
 Assignment
 ==================
 
-let w = 3
+let w = 3.1415
 
 ---
 
 (kcl_program
 	(definition
 		(identifier)
-		(int)
+		(number)
 	)
 )
+

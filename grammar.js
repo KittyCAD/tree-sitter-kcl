@@ -16,9 +16,28 @@ module.exports = grammar({
     ),
 
     _value: $ => choice(
-      $.int,
+      $.number,
     ),
 
-    int: $ => /\d+/,
+    number: _ => {
+      const decimalDigits = /\d+/;
+      const signedInteger = seq(optional('-'), decimalDigits);
+      const exponentPart = seq(choice('e', 'E'), signedInteger);
+
+      const decimalIntegerLiteral = seq(
+        optional('-'),
+        choice(
+          '0',
+          seq(/[1-9]/, optional(decimalDigits)),
+        ),
+      );
+
+      const decimalLiteral = choice(
+        seq(decimalIntegerLiteral, '.', optional(decimalDigits), optional(exponentPart)),
+        seq(decimalIntegerLiteral, optional(exponentPart)),
+      );
+
+      return token(decimalLiteral);
+    },
   }
 });

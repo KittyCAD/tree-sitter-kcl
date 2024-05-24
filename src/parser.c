@@ -20,7 +20,7 @@ enum {
   anon_sym_let = 1,
   anon_sym_EQ = 2,
   aux_sym_identifier_token1 = 3,
-  sym_int = 4,
+  sym_number = 4,
   sym_kcl_program = 5,
   sym_definition = 6,
   sym_identifier = 7,
@@ -33,7 +33,7 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_let] = "let",
   [anon_sym_EQ] = "=",
   [aux_sym_identifier_token1] = "identifier_token1",
-  [sym_int] = "int",
+  [sym_number] = "number",
   [sym_kcl_program] = "kcl_program",
   [sym_definition] = "definition",
   [sym_identifier] = "identifier",
@@ -46,7 +46,7 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_let] = anon_sym_let,
   [anon_sym_EQ] = anon_sym_EQ,
   [aux_sym_identifier_token1] = aux_sym_identifier_token1,
-  [sym_int] = sym_int,
+  [sym_number] = sym_number,
   [sym_kcl_program] = sym_kcl_program,
   [sym_definition] = sym_definition,
   [sym_identifier] = sym_identifier,
@@ -71,7 +71,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = false,
   },
-  [sym_int] = {
+  [sym_number] = {
     .visible = true,
     .named = true,
   },
@@ -123,47 +123,79 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
   eof = lexer->eof(lexer);
   switch (state) {
     case 0:
-      if (eof) ADVANCE(4);
-      if (lookahead == '=') ADVANCE(6);
-      if (lookahead == 'l') ADVANCE(1);
+      if (eof) ADVANCE(7);
+      if (lookahead == '-') ADVANCE(2);
+      if (lookahead == '0') ADVANCE(11);
+      if (lookahead == '=') ADVANCE(9);
+      if (lookahead == 'l') ADVANCE(3);
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
           lookahead == ' ') SKIP(0)
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(8);
+      if (('1' <= lookahead && lookahead <= '9')) ADVANCE(12);
       END_STATE();
     case 1:
-      if (lookahead == 'e') ADVANCE(2);
+      if (lookahead == '-') ADVANCE(6);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(14);
       END_STATE();
     case 2:
-      if (lookahead == 't') ADVANCE(5);
+      if (lookahead == '0') ADVANCE(11);
+      if (('1' <= lookahead && lookahead <= '9')) ADVANCE(12);
       END_STATE();
     case 3:
+      if (lookahead == 'e') ADVANCE(4);
+      END_STATE();
+    case 4:
+      if (lookahead == 't') ADVANCE(8);
+      END_STATE();
+    case 5:
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
-          lookahead == ' ') SKIP(3)
+          lookahead == ' ') SKIP(5)
       if (('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(7);
-      END_STATE();
-    case 4:
-      ACCEPT_TOKEN(ts_builtin_sym_end);
-      END_STATE();
-    case 5:
-      ACCEPT_TOKEN(anon_sym_let);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(10);
       END_STATE();
     case 6:
-      ACCEPT_TOKEN(anon_sym_EQ);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(14);
       END_STATE();
     case 7:
+      ACCEPT_TOKEN(ts_builtin_sym_end);
+      END_STATE();
+    case 8:
+      ACCEPT_TOKEN(anon_sym_let);
+      END_STATE();
+    case 9:
+      ACCEPT_TOKEN(anon_sym_EQ);
+      END_STATE();
+    case 10:
       ACCEPT_TOKEN(aux_sym_identifier_token1);
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(7);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(10);
       END_STATE();
-    case 8:
-      ACCEPT_TOKEN(sym_int);
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(8);
+    case 11:
+      ACCEPT_TOKEN(sym_number);
+      if (lookahead == '.') ADVANCE(13);
+      if (lookahead == 'E' ||
+          lookahead == 'e') ADVANCE(1);
+      END_STATE();
+    case 12:
+      ACCEPT_TOKEN(sym_number);
+      if (lookahead == '.') ADVANCE(13);
+      if (lookahead == 'E' ||
+          lookahead == 'e') ADVANCE(1);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(12);
+      END_STATE();
+    case 13:
+      ACCEPT_TOKEN(sym_number);
+      if (lookahead == 'E' ||
+          lookahead == 'e') ADVANCE(1);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(13);
+      END_STATE();
+    case 14:
+      ACCEPT_TOKEN(sym_number);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(14);
       END_STATE();
     default:
       return false;
@@ -175,7 +207,7 @@ static const TSLexMode ts_lex_modes[STATE_COUNT] = {
   [1] = {.lex_state = 0},
   [2] = {.lex_state = 0},
   [3] = {.lex_state = 0},
-  [4] = {.lex_state = 3},
+  [4] = {.lex_state = 5},
   [5] = {.lex_state = 0},
   [6] = {.lex_state = 0},
   [7] = {.lex_state = 0},
@@ -188,7 +220,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [ts_builtin_sym_end] = ACTIONS(1),
     [anon_sym_let] = ACTIONS(1),
     [anon_sym_EQ] = ACTIONS(1),
-    [sym_int] = ACTIONS(1),
+    [sym_number] = ACTIONS(1),
   },
   [1] = {
     [sym_kcl_program] = STATE(7),
@@ -223,7 +255,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_identifier,
   [29] = 2,
     ACTIONS(16), 1,
-      sym_int,
+      sym_number,
     STATE(6), 1,
       sym__value,
   [36] = 1,
