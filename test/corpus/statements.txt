@@ -34,7 +34,7 @@ let name = "abc"
 Function definition
 ==================
 
-fn f = () => {
+fn f = (x, y) => {
 	return 2
 }
 
@@ -44,7 +44,10 @@ fn f = () => {
 	(fn_definition
 		(identifier)
 		(function
-			(parameter_list)
+			(parameter_list
+				(identifier)
+				(identifier)
+			)
 			(function_body
 				(return_stmt
 					(number)
