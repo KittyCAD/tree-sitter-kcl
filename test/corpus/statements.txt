@@ -1,0 +1,14 @@
+==================
+Assignment
+==================
+
+let w = 3
+
+---
+
+(kcl_program
+	(definition
+		(identifier)
+		(int)
+	)
+)
