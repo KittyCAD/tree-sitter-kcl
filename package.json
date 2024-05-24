@@ -13,6 +13,17 @@
     "queries/*",
     "src/**"
   ],
+  "tree-sitter": [
+    {
+      "scope": "source.kcl",
+      "file-types": [
+        "kcl"
+      ],
+      "injection-regex": "kcl",
+      "highlights": "queries/highlights.scm",
+      "tags": "queries/tags.scm"
+    }
+  ],
   "dependencies": {
     "nan": "^2.12.1"
   },
