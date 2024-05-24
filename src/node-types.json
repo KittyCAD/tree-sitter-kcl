@@ -1,6 +1,6 @@
 [
   {
-    "type": "definition",
+    "type": "fn_definition",
     "named": true,
     "fields": {},
     "children": {
@@ -8,15 +8,53 @@
       "required": true,
       "types": [
         {
+          "type": "function",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "function",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
         {
-          "type": "number",
+          "type": "function_body",
           "named": true
         },
         {
-          "type": "string",
+          "type": "parameter_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "fn_definition",
+          "named": true
+        },
+        {
+          "type": "non_fn_definition",
+          "named": true
+        },
+        {
+          "type": "return_stmt",
           "named": true
         }
       ]
@@ -36,7 +74,76 @@
       "required": false,
       "types": [
         {
-          "type": "definition",
+          "type": "fn_definition",
+          "named": true
+        },
+        {
+          "type": "non_fn_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "non_fn_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameter_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "return_stmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -66,12 +173,32 @@
     "named": false
   },
   {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
     "type": "=",
+    "named": false
+  },
+  {
+    "type": "=>",
     "named": false
   },
   {
     "type": "escape_sequence",
     "named": true
+  },
+  {
+    "type": "fn",
+    "named": false
   },
   {
     "type": "let",
@@ -82,7 +209,19 @@
     "named": true
   },
   {
+    "type": "return",
+    "named": false
+  },
+  {
     "type": "string_content",
     "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
   }
 ]

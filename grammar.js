@@ -2,15 +2,27 @@ module.exports = grammar({
   name: 'kcl',
 
   rules: {
-    kcl_program: $ => repeat($.definition),
+    kcl_program: $ => repeat($._definition),
 
-    definition: $ => seq(
+    _definition: $ => choice(
+      $.fn_definition,
+      $.non_fn_definition,
+    ),
+
+    non_fn_definition: $ => seq(
       'let',
       $.identifier,
       '=',
       $._value,
     ),
 
+    fn_definition: $ => seq(
+      'fn',
+      $.identifier,
+      '=',
+      $.function,
+    ),
+    
     identifier: $ => seq(
       /[a-zA-Z][a-zA-Z0-9]*/
     ),
@@ -18,8 +30,37 @@ module.exports = grammar({
     _value: $ => choice(
       $.number,
       $.string,
+      $.function,
     ),
 
+    function: $ => seq(
+      $.parameter_list,
+      '=>',
+      $.function_body,
+    ),
+
+    parameter_list: $ => seq(
+      '(',
+      commaSep($.identifier),
+      ')',
+    ),
+
+    function_body: $ => seq(
+      '{',
+      seq($._body_item),
+      '}',
+    ),
+
+    _body_item: $ => choice(
+        $._definition,
+        $.return_stmt,
+    ),
+
+    return_stmt: $ => seq(
+      'return',
+      $._value,
+    ),
+    
     string: $ => choice(
       seq('"', '"'),
       seq('"', $._string_content, '"'),
@@ -58,4 +99,29 @@ module.exports = grammar({
       return token(decimalLiteral);
     },
   }
+
+
 });
+    /**
+   * Creates a rule to match one or more of the rules separated by a comma
+   *
+   * @param {RuleOrLiteral} rule
+   *
+   * @return {SeqRule}
+   *
+   */
+  function commaSep1(rule) {
+    return seq(rule, repeat(seq(',', rule)));
+  }
+
+  /**
+   * Creates a rule to optionally match one or more of the rules separated by a comma
+   *
+   * @param {RuleOrLiteral} rule
+   *
+   * @return {ChoiceRule}
+   *
+   */
+  function commaSep(rule) {
+    return optional(commaSep1(rule));
+  }

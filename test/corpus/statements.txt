@@ -7,7 +7,7 @@ let w = 3.1415
 ---
 
 (kcl_program
-	(definition
+	(non_fn_definition
 		(identifier)
 		(number)
 	)
@@ -22,10 +22,34 @@ let name = "abc"
 ---
 
 (kcl_program
-	(definition
+	(non_fn_definition
 		(identifier)
 		(string
 			(string_content)
+		)
+	)
+)
+
+==================
+Function definition
+==================
+
+fn f = () => {
+	return 2
+}
+
+---
+
+(kcl_program
+	(fn_definition
+		(identifier)
+		(function
+			(parameter_list)
+			(function_body
+				(return_stmt
+					(number)
+				)
+			)
 		)
 	)
 )
