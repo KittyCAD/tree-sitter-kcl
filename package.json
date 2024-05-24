@@ -20,7 +20,7 @@
         "kcl"
       ],
       "injection-regex": "kcl",
-      "highlights": "queries/highlights.scm",
+      "highlights": "queries/highlights.scm"
     }
   ],
   "dependencies": {
