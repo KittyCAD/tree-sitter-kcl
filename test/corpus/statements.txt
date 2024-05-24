@@ -13,3 +13,20 @@ let w = 3.1415
 	)
 )
 
+==================
+String assignment
+==================
+
+let name = "abc"
+
+---
+
+(kcl_program
+	(definition
+		(identifier)
+		(string
+			(string_content)
+		)
+	)
+)
+
