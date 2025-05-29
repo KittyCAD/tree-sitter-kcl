@@ -63,8 +63,8 @@ module.exports = grammar({
     fn_call: $ => seq(
       $.identifier,
       '(',
-      optional($._expr),
-      repeat(seq($.identifier, '=', $._expr)),
+      optional(field("unlabeledFirstArg", $._expr)),
+      optional(seq(',', commaSep1(field("labeledArg", seq($.identifier, '=', $._expr))))),
       ')'
     ),
 

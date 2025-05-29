@@ -153,7 +153,7 @@ val = 1 + 2 / 4
 Function call
 ==================
 
-f(1)
+f(1, x = 10)
 
 ---
 
@@ -162,7 +162,9 @@ f(1)
 		(expr_stmt
 			(fn_call
 				(identifier)
-				(number)
+				unlabeledFirstArg: (number)
+				labeledArg: (identifier)
+				labeledArg: (number)
 			)
 		)
 	)
@@ -184,11 +186,7 @@ val = 1 |> f()
 				(binary_expr
 				  lhs: (number)
 				  operator: (binary_operator)
-				  rhs: (binary_expr
-				    lhs: (number)
-					operator: (binary_operator)
-				    rhs: (number)
-				  )
+				  rhs: (fn_call (identifier))
 				)
 			)
 		)

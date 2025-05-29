@@ -4,3 +4,5 @@ Remember to run tree-sitter generate
 Open nvim and run `:help treesitter-highlight` to get a tutorial on highlights.scm
 
 The top rule is assumed to be the entrypoint, so it should be `kcl_program` or whatever.
+
+Look at treesitter julia for juxtaposition expressions, like 10cm where you have a number followed immediatley by its uom
