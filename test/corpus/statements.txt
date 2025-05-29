@@ -187,8 +187,10 @@ yLine(length = diameter)
 			(fn_call
 				callee: (identifier)
 				unlabeledArg: (number)
-				labeledArg: (identifier)
-				labeledArg: (number)
+				(labeledArg
+					label: (identifier)
+					arg: (number)
+				)
 			)
 		)
 	)
@@ -196,8 +198,10 @@ yLine(length = diameter)
 		(expr_stmt
 			(fn_call
 				callee: (identifier)
-				labeledArg: (identifier)
-				labeledArg: (identifier)
+				(labeledArg
+					label: (identifier)
+					arg: (identifier)
+				)
 			)
 		)
 	)

@@ -282,25 +282,8 @@
                       }
                     },
                     {
-                      "type": "FIELD",
-                      "name": "labeledArg",
-                      "content": {
-                        "type": "SEQ",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "identifier"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "="
-                          },
-                          {
-                            "type": "SYMBOL",
-                            "name": "_expr"
-                          }
-                        ]
-                      }
+                      "type": "SYMBOL",
+                      "name": "labeledArg"
                     }
                   ]
                 },
@@ -325,25 +308,8 @@
                             }
                           },
                           {
-                            "type": "FIELD",
-                            "name": "labeledArg",
-                            "content": {
-                              "type": "SEQ",
-                              "members": [
-                                {
-                                  "type": "SYMBOL",
-                                  "name": "identifier"
-                                },
-                                {
-                                  "type": "STRING",
-                                  "value": "="
-                                },
-                                {
-                                  "type": "SYMBOL",
-                                  "name": "_expr"
-                                }
-                              ]
-                            }
+                            "type": "SYMBOL",
+                            "name": "labeledArg"
                           }
                         ]
                       }
@@ -360,6 +326,31 @@
         {
           "type": "STRING",
           "value": ")"
+        }
+      ]
+    },
+    "labeledArg": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "label",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "FIELD",
+          "name": "arg",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expr"
+          }
         }
       ]
     },

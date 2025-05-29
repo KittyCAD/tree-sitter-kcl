@@ -42,7 +42,7 @@
 ;  ] @keyword.conditional
 
 (fn_call
-  callee: (identifier @function)
+  callee: (identifier) @function
 )
 
 ;; operators

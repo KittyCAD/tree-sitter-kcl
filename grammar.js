@@ -78,9 +78,11 @@ module.exports = grammar({
     fn_call: $ => seq(
       field("callee", $.identifier),
       '(',
-      commaSep(choice(field("unlabeledArg", $._expr), field("labeledArg", seq($.identifier, '=', $._expr)))),
+      commaSep(choice(field("unlabeledArg", $._expr), $.labeledArg)),
       ')'
     ),
+
+    labeledArg: $ => seq(field("label",$.identifier), '=', field("arg", $._expr)),
 
     function_body: $ => seq(
       '{',
