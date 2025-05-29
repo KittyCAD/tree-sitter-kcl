@@ -16,6 +16,10 @@
             "named": true
           },
           {
+            "type": "fn_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -56,6 +60,10 @@
             "named": true
           },
           {
+            "type": "fn_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -84,6 +92,10 @@
       "required": true,
       "types": [
         {
+          "type": "expr_stmt",
+          "named": true
+        },
+        {
           "type": "return_stmt",
           "named": true
         },
@@ -98,6 +110,84 @@
     "type": "boolean",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "expr_stmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expr",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "fn_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "prefix_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fn_call",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expr",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "fn_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "prefix_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "fn_definition",
@@ -151,6 +241,10 @@
           "named": true
         },
         {
+          "type": "fn_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -183,6 +277,10 @@
           },
           {
             "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "fn_call",
             "named": true
           },
           {
@@ -234,6 +332,10 @@
         },
         {
           "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "fn_call",
           "named": true
         },
         {

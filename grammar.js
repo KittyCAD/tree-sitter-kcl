@@ -25,10 +25,12 @@ module.exports = grammar({
     kcl_program: $ => repeat($.body_item),
 
     body_item: $ => choice(
-      // $.expression,
+      $.expr_stmt,
       $.variable_declaration,
       $.return_stmt,
     ),
+
+    expr_stmt: $ => $._expr,
 
     variable_declaration: $ => choice(
       $.fn_definition,
@@ -55,6 +57,15 @@ module.exports = grammar({
       $.identifier,
       $.binary_expr,
       $.prefix_expr,
+      $.fn_call,
+    ),
+
+    fn_call: $ => seq(
+      $.identifier,
+      '(',
+      optional($._expr),
+      repeat(seq($.identifier, '=', $._expr)),
+      ')'
     ),
 
     function_body: $ => seq(
@@ -127,7 +138,7 @@ module.exports = grammar({
           PREC.cmp,
           choice(">", "<", ">=", "<="),
         ],
-        [prec.left, PREC.eq, "="],
+        [prec.left, PREC.eq, "=="],
         [prec.left, PREC.neq, "!="],
         [prec.left, PREC.add, choice("+", "-",)],
         [prec.left, PREC.mul, choice("*", "/", "%")],

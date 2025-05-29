@@ -149,3 +149,49 @@ val = 1 + 2 / 4
 	)
 )
 
+==================
+Function call
+==================
+
+f(1)
+
+---
+
+(kcl_program
+	(body_item
+		(expr_stmt
+			(fn_call
+				(identifier)
+				(number)
+			)
+		)
+	)
+)
+
+==================
+Pipes
+==================
+
+val = 1 |> f()
+
+---
+
+(kcl_program
+	(body_item
+		(variable_declaration
+			(non_fn_definition
+				(identifier)
+				(binary_expr
+				  lhs: (number)
+				  operator: (binary_operator)
+				  rhs: (binary_expr
+				    lhs: (number)
+					operator: (binary_operator)
+				    rhs: (number)
+				  )
+				)
+			)
+		)
+	)
+)
+
