@@ -1,7 +1,27 @@
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
+const PREC = {
+  mul: 12,
+  div: 12,
+  mod: 12,
+  add: 11,
+  sub: 11,
+  pow: 13,
+  cmp: 9,
+  eq: 8,
+  neq: 8,
+  and: 7,
+  or: 6,
+  prefix: 20,
+  pipe: 5, // |>
+};
+
 module.exports = grammar({
   name: 'kcl',
 
   rules: {
+
     kcl_program: $ => repeat($.body_item),
 
     body_item: $ => choice(
@@ -24,14 +44,17 @@ module.exports = grammar({
       repeat($.body_item),
       '}',
     ),
-    
-    identifier: $ => 
+
+    identifier: $ =>
       /[a-zA-Z][a-zA-Z0-9]*/,
 
     _expr: $ => choice(
       $.number,
       $.string,
+      $.boolean,
       $.identifier,
+      $.binary_expr,
+      $.prefix_expr,
     ),
 
     function_body: $ => seq(
@@ -44,7 +67,7 @@ module.exports = grammar({
       'return',
       $._expr,
     ),
-    
+
     non_fn_definition: $ => seq(
       $.identifier,
       '=',
@@ -55,6 +78,8 @@ module.exports = grammar({
       seq('"', '"'),
       seq('"', $._string_content, '"'),
     ),
+
+    boolean: $ => choice("true", "false"),
 
     _string_content: $ => repeat1(choice(
       $._normal_string_content,
@@ -67,6 +92,65 @@ module.exports = grammar({
       '\\',
       /(\"|\\|\/|b|f|n|r|t|u)/,
     )),
+    prefix_expr: ($) =>
+      prec.right(
+        PREC.prefix,
+        seq(field("operator", $.prefix_operator), field("operand", $._expr)),
+      ),
+
+    prefix_operator: (_) => choice("!", "-"),
+
+    binary_operator: (_) =>
+      choice(
+        "+",
+        "-",
+        "/",
+        "*",
+        "^",
+        "%",
+        "==",
+        "!=",
+        ">",
+        ">=",
+        "<",
+        "<=",
+        "|",
+        "&",
+        "|>",
+      ),
+
+    binary_expr: ($) => {
+      const table = [
+        [prec.right, PREC.pow, "^"],
+        [
+          prec.left,
+          PREC.cmp,
+          choice(">", "<", ">=", "<="),
+        ],
+        [prec.left, PREC.eq, "="],
+        [prec.left, PREC.neq, "!="],
+        [prec.left, PREC.add, choice("+", "-",)],
+        [prec.left, PREC.mul, choice("*", "/", "%")],
+        [prec.right, PREC.and, "&"],
+        [prec.left, PREC.or, "|"],
+        [prec.left, PREC.pipe, "|>"],
+      ];
+
+      return choice(
+        ...table.map(([fn, prec, op]) =>
+          //@ts-ignore
+          fn(
+            prec,
+            seq(
+              field("lhs", $._expr),
+              //@ts-ignore
+              field("operator", alias(op, $.binary_operator)),
+              field("rhs", $._expr),
+            ),
+          ),
+        ),
+      );
+    },
 
     number: _ => {
       const decimalDigits = /\d+/;
@@ -92,26 +176,26 @@ module.exports = grammar({
 
 
 });
-    /**
-   * Creates a rule to match one or more of the rules separated by a comma
-   *
-   * @param {RuleOrLiteral} rule
-   *
-   * @return {SeqRule}
-   *
-   */
-  function commaSep1(rule) {
-    return seq(rule, repeat(seq(',', rule)));
-  }
+/**
+* Creates a rule to match one or more of the rules separated by a comma
+*
+* @param {RuleOrLiteral} rule
+*
+* @return {SeqRule}
+*
+*/
+function commaSep1(rule) {
+  return seq(rule, repeat(seq(',', rule)));
+}
 
-  /**
-   * Creates a rule to optionally match one or more of the rules separated by a comma
-   *
-   * @param {RuleOrLiteral} rule
-   *
-   * @return {ChoiceRule}
-   *
-   */
-  function commaSep(rule) {
-    return optional(commaSep1(rule));
-  }
+/**
+ * Creates a rule to optionally match one or more of the rules separated by a comma
+ *
+ * @param {RuleOrLiteral} rule
+ *
+ * @return {ChoiceRule}
+ *
+ */
+function commaSep(rule) {
+  return optional(commaSep1(rule));
+}

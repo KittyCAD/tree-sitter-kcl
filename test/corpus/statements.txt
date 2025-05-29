@@ -18,6 +18,25 @@ w = 3.1415
 )
 
 ==================
+Bool assignment
+==================
+
+w = true
+
+---
+
+(kcl_program
+	(body_item
+		(variable_declaration
+			(non_fn_definition
+				(identifier)
+				(boolean)
+			)
+		)
+	)
+)
+
+==================
 String assignment
 ==================
 
@@ -73,6 +92,57 @@ fn f() {
 					(return_stmt
 						(identifier)
 					)
+				)
+			)
+		)
+	)
+)
+
+==================
+Basic math
+==================
+
+val = 1 + 2
+
+---
+
+(kcl_program
+	(body_item
+		(variable_declaration
+			(non_fn_definition
+				(identifier)
+				(binary_expr
+				  lhs: (number)
+				  operator: (binary_operator)
+				  rhs: (number)
+				)
+			)
+		)
+	)
+)
+
+
+==================
+Chaining math
+==================
+
+val = 1 + 2 / 4
+
+---
+
+(kcl_program
+	(body_item
+		(variable_declaration
+			(non_fn_definition
+				(identifier)
+				(binary_expr
+				  lhs: (number)
+				  operator: (binary_operator)
+				  rhs: (binary_expr
+				    lhs: (number)
+					operator: (binary_operator)
+				    rhs: (number)
+				  )
 				)
 			)
 		)

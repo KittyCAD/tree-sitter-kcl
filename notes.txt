@@ -1,2 +1,6 @@
 preceding _ means it hides the node from the AST
 Remember to run tree-sitter generate
+
+Open nvim and run `:help treesitter-highlight` to get a tutorial on highlights.scm
+
+The top rule is assumed to be the entrypoint, so it should be `kcl_program` or whatever.
