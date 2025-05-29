@@ -43,6 +43,9 @@
 
 (fn_call
   callee: (identifier) @function
+  (labeledArg
+    label: (identifier) @variable.parameter
+  )
 )
 
 ;; operators
