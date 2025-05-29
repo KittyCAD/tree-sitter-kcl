@@ -1,0 +1,2 @@
+preceding _ means it hides the node from the AST
+Remember to run tree-sitter generate

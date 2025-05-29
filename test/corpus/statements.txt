@@ -2,14 +2,18 @@
 Assignment
 ==================
 
-let w = 3.1415
+w = 3.1415
 
 ---
 
 (kcl_program
-	(non_fn_definition
-		(identifier)
-		(number)
+	(body_item
+		(variable_declaration
+			(non_fn_definition
+				(identifier)
+				(number)
+			)
+		)
 	)
 )
 
@@ -17,15 +21,17 @@ let w = 3.1415
 String assignment
 ==================
 
-let name = "abc"
+name = "abc"
 
 ---
 
 (kcl_program
-	(non_fn_definition
-		(identifier)
-		(string
-			(string_content)
+	(body_item
+		(variable_declaration
+			(non_fn_definition
+				(identifier)
+				(string)
+			)
 		)
 	)
 )
@@ -34,23 +40,39 @@ let name = "abc"
 Function definition
 ==================
 
-fn f = (x, y) => {
-	return 2
+fn f() {
+	x = "abc"
+	y = "abc"
+	return x
 }
 
 ---
 
 (kcl_program
-	(fn_definition
-		(identifier)
-		(function
-			(parameter_list
+	(body_item
+		(variable_declaration
+			(fn_definition
 				(identifier)
-				(identifier)
-			)
-			(function_body
-				(return_stmt
-					(number)
+				(body_item
+					(variable_declaration
+						(non_fn_definition
+							(identifier)
+							(string)
+						)
+					)
+				)
+				(body_item
+					(variable_declaration
+						(non_fn_definition
+							(identifier)
+							(string)
+						)
+					)
+				)
+				(body_item
+					(return_stmt
+						(identifier)
+					)
 				)
 			)
 		)

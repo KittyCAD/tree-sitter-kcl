@@ -2,76 +2,66 @@ module.exports = grammar({
   name: 'kcl',
 
   rules: {
-    kcl_program: $ => repeat($._definition),
+    kcl_program: $ => repeat($.body_item),
 
-    _definition: $ => choice(
-      $.fn_definition,
-      $.non_fn_definition,
+    body_item: $ => choice(
+      // $.expression,
+      $.variable_declaration,
+      $.return_stmt,
     ),
 
-    non_fn_definition: $ => seq(
-      'let',
-      $.identifier,
-      '=',
-      $._value,
+    variable_declaration: $ => choice(
+      $.fn_definition,
+      $.non_fn_definition,
     ),
 
     fn_definition: $ => seq(
       'fn',
       $.identifier,
-      '=',
-      $.function,
+      '(',
+      ')',
+      '{',
+      repeat($.body_item),
+      '}',
     ),
     
-    identifier: $ => seq(
-      /[a-zA-Z][a-zA-Z0-9]*/
-    ),
+    identifier: $ => 
+      /[a-zA-Z][a-zA-Z0-9]*/,
 
-    _value: $ => choice(
+    _expr: $ => choice(
       $.number,
       $.string,
-      $.function,
-    ),
-
-    function: $ => seq(
-      $.parameter_list,
-      '=>',
-      $.function_body,
-    ),
-
-    parameter_list: $ => seq(
-      '(',
-      commaSep($.identifier),
-      ')',
+      $.identifier,
     ),
 
     function_body: $ => seq(
       '{',
-      seq($._body_item),
+      seq($.body_item),
       '}',
-    ),
-
-    _body_item: $ => choice(
-        $._definition,
-        $.return_stmt,
     ),
 
     return_stmt: $ => seq(
       'return',
-      $._value,
+      $._expr,
     ),
     
+    non_fn_definition: $ => seq(
+      $.identifier,
+      '=',
+      $._expr,
+    ),
+
     string: $ => choice(
       seq('"', '"'),
       seq('"', $._string_content, '"'),
     ),
 
     _string_content: $ => repeat1(choice(
-      $.string_content,
+      $._normal_string_content,
       $.escape_sequence,
     )),
 
-    string_content: _ => token.immediate(prec(1, /[^\\"\n]+/)),
+    _normal_string_content: _ => token.immediate(prec(1, /[^\\"\n]+/)),
 
     escape_sequence: _ => token.immediate(seq(
       '\\',

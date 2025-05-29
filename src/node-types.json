@@ -1,5 +1,24 @@
 [
   {
+    "type": "body_item",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "return_stmt",
+          "named": true
+        },
+        {
+          "type": "variable_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "fn_definition",
     "named": true,
     "fields": {},
@@ -8,7 +27,7 @@
       "required": true,
       "types": [
         {
-          "type": "function",
+          "type": "body_item",
           "named": true
         },
         {
@@ -19,66 +38,16 @@
     }
   },
   {
-    "type": "function",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "function_body",
-          "named": true
-        },
-        {
-          "type": "parameter_list",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "function_body",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "fn_definition",
-          "named": true
-        },
-        {
-          "type": "non_fn_definition",
-          "named": true
-        },
-        {
-          "type": "return_stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "identifier",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "kcl_program",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "fn_definition",
-          "named": true
-        },
-        {
-          "type": "non_fn_definition",
+          "type": "body_item",
           "named": true
         }
       ]
@@ -92,10 +61,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "function",
-          "named": true
-        },
         {
           "type": "identifier",
           "named": true
@@ -112,21 +77,6 @@
     }
   },
   {
-    "type": "parameter_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "return_stmt",
     "named": true,
     "fields": {},
@@ -135,7 +85,7 @@
       "required": true,
       "types": [
         {
-          "type": "function",
+          "type": "identifier",
           "named": true
         },
         {
@@ -160,9 +110,24 @@
         {
           "type": "escape_sequence",
           "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "fn_definition",
+          "named": true
         },
         {
-          "type": "string_content",
+          "type": "non_fn_definition",
           "named": true
         }
       ]
@@ -181,15 +146,7 @@
     "named": false
   },
   {
-    "type": ",",
-    "named": false
-  },
-  {
     "type": "=",
-    "named": false
-  },
-  {
-    "type": "=>",
     "named": false
   },
   {
@@ -201,8 +158,8 @@
     "named": false
   },
   {
-    "type": "let",
-    "named": false
+    "type": "identifier",
+    "named": true
   },
   {
     "type": "number",
@@ -211,10 +168,6 @@
   {
     "type": "return",
     "named": false
-  },
-  {
-    "type": "string_content",
-    "named": true
   },
   {
     "type": "{",
