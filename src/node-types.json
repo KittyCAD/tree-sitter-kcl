@@ -28,6 +28,10 @@
             "named": true
           },
           {
+            "type": "pipe_sub",
+            "named": true
+          },
+          {
             "type": "prefix_expr",
             "named": true
           },
@@ -69,6 +73,10 @@
           },
           {
             "type": "number",
+            "named": true
+          },
+          {
+            "type": "pipe_sub",
             "named": true
           },
           {
@@ -140,6 +148,10 @@
           "named": true
         },
         {
+          "type": "pipe_sub",
+          "named": true
+        },
+        {
           "type": "prefix_expr",
           "named": true
         },
@@ -183,6 +195,10 @@
             "named": true
           },
           {
+            "type": "pipe_sub",
+            "named": true
+          },
+          {
             "type": "prefix_expr",
             "named": true
           },
@@ -214,6 +230,10 @@
           },
           {
             "type": "number",
+            "named": true
+          },
+          {
+            "type": "pipe_sub",
             "named": true
           },
           {
@@ -302,6 +322,10 @@
           "named": true
         },
         {
+          "type": "pipe_sub",
+          "named": true
+        },
+        {
           "type": "prefix_expr",
           "named": true
         },
@@ -311,6 +335,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "pipe_sub",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "prefix_expr",
@@ -338,6 +367,10 @@
           },
           {
             "type": "number",
+            "named": true
+          },
+          {
+            "type": "pipe_sub",
             "named": true
           },
           {
@@ -396,6 +429,10 @@
           "named": true
         },
         {
+          "type": "pipe_sub",
+          "named": true
+        },
+        {
           "type": "prefix_expr",
           "named": true
         },
@@ -446,6 +483,10 @@
   },
   {
     "type": "\"",
+    "named": false
+  },
+  {
+    "type": "%",
     "named": false
   },
   {

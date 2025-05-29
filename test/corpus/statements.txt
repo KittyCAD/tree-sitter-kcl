@@ -174,7 +174,7 @@ f(1, x = 10)
 Pipes
 ==================
 
-val = 1 |> f()
+val = 1 |> f(%)
 
 ---
 
@@ -186,7 +186,7 @@ val = 1 |> f()
 				(binary_expr
 				  lhs: (number)
 				  operator: (binary_operator)
-				  rhs: (fn_call (identifier))
+				  rhs: (fn_call (identifier) unlabeledFirstArg: (pipe_sub))
 				)
 			)
 		)

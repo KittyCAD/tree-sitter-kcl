@@ -113,8 +113,16 @@
         {
           "type": "SYMBOL",
           "name": "fn_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "pipe_sub"
         }
       ]
+    },
+    "pipe_sub": {
+      "type": "STRING",
+      "value": "%"
     },
     "fn_call": {
       "type": "SEQ",

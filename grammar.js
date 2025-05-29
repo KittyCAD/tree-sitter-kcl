@@ -58,7 +58,10 @@ module.exports = grammar({
       $.binary_expr,
       $.prefix_expr,
       $.fn_call,
+      $.pipe_sub,
     ),
+
+    pipe_sub: $ => '%',
 
     fn_call: $ => seq(
       $.identifier,
