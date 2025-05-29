@@ -66,17 +66,19 @@ module.exports = grammar({
       $.identifier,
       $.binary_expr,
       $.prefix_expr,
+      $.array_expr,
       $.fn_call,
       $.pipe_sub,
     ),
+
+    array_expr: $ => seq('[', optional(commaSep($._expr)), ']'),
 
     pipe_sub: $ => '%',
 
     fn_call: $ => seq(
       $.identifier,
       '(',
-      optional(field("unlabeledFirstArg", $._expr)),
-      optional(seq(',', commaSep1(field("labeledArg", seq($.identifier, '=', $._expr))))),
+      commaSep(choice(field("unlabeledFirstArg", $._expr), field("labeledArg", seq($.identifier, '=', $._expr)))),
       ')'
     ),
 

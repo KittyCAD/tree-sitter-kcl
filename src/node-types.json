@@ -1,5 +1,52 @@
 [
   {
+    "type": "array_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "array_expr",
+          "named": true
+        },
+        {
+          "type": "binary_expr",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "fn_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "pipe_sub",
+          "named": true
+        },
+        {
+          "type": "prefix_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "binary_expr",
     "named": true,
     "fields": {
@@ -7,6 +54,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "array_expr",
+            "named": true
+          },
           {
             "type": "binary_expr",
             "named": true
@@ -55,6 +106,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "array_expr",
+            "named": true
+          },
           {
             "type": "binary_expr",
             "named": true
@@ -156,6 +211,10 @@
       "required": true,
       "types": [
         {
+          "type": "array_expr",
+          "named": true
+        },
+        {
           "type": "binary_expr",
           "named": true
         },
@@ -203,6 +262,10 @@
             "named": false
           },
           {
+            "type": "array_expr",
+            "named": true
+          },
+          {
             "type": "binary_expr",
             "named": true
           },
@@ -237,9 +300,13 @@
         ]
       },
       "unlabeledFirstArg": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "array_expr",
+            "named": true
+          },
           {
             "type": "binary_expr",
             "named": true
@@ -360,6 +427,10 @@
       "required": true,
       "types": [
         {
+          "type": "array_expr",
+          "named": true
+        },
+        {
           "type": "binary_expr",
           "named": true
         },
@@ -407,6 +478,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "array_expr",
+            "named": true
+          },
           {
             "type": "binary_expr",
             "named": true
@@ -466,6 +541,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "array_expr",
+          "named": true
+        },
         {
           "type": "binary_expr",
           "named": true
@@ -569,6 +648,14 @@
   },
   {
     "type": "=",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
     "named": false
   },
   {

@@ -123,6 +123,29 @@ val = 1 + 2
 
 
 ==================
+Arrays
+==================
+
+point = [0, 0]
+
+---
+
+(kcl_program
+	(body_item
+		(variable_declaration
+			(non_fn_definition
+				(identifier)
+				(array_expr
+					(number)
+					(number)
+				)
+			)
+		)
+	)
+)
+
+
+==================
 Chaining math
 ==================
 
@@ -154,6 +177,7 @@ Function call
 ==================
 
 f(1, x = 10)
+yLine(length = diameter)
 
 ---
 
@@ -165,6 +189,15 @@ f(1, x = 10)
 				unlabeledFirstArg: (number)
 				labeledArg: (identifier)
 				labeledArg: (number)
+			)
+		)
+	)
+	(body_item
+		(expr_stmt
+			(fn_call
+				(identifier)
+				labeledArg: (identifier)
+				labeledArg: (identifier)
 			)
 		)
 	)
