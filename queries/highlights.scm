@@ -41,6 +41,10 @@
 ;  "else"
 ;  ] @keyword.conditional
 
+(fn_call
+  callee: (identifier @function)
+)
+
 ;; operators
 (binary_operator) @operator
 (prefix_operator) @operator
@@ -62,9 +66,9 @@
 ; ";" @punctuation.delimiter
 
 ;; literals
-(boolean) @boolean
+(boolean) @constant.builtin.boolean
 (string) @string
-(number) @number
+(number) @constant.builtin.numeric
 
 ;; comments
 (shebang) @keyword.directive

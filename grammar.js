@@ -76,9 +76,9 @@ module.exports = grammar({
     pipe_sub: $ => '%',
 
     fn_call: $ => seq(
-      $.identifier,
+      field("callee", $.identifier),
       '(',
-      commaSep(choice(field("unlabeledFirstArg", $._expr), field("labeledArg", seq($.identifier, '=', $._expr)))),
+      commaSep(choice(field("unlabeledArg", $._expr), field("labeledArg", seq($.identifier, '=', $._expr)))),
       ')'
     ),
 

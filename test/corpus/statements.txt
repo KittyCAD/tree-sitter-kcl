@@ -185,8 +185,8 @@ yLine(length = diameter)
 	(body_item
 		(expr_stmt
 			(fn_call
-				(identifier)
-				unlabeledFirstArg: (number)
+				callee: (identifier)
+				unlabeledArg: (number)
 				labeledArg: (identifier)
 				labeledArg: (number)
 			)
@@ -195,7 +195,7 @@ yLine(length = diameter)
 	(body_item
 		(expr_stmt
 			(fn_call
-				(identifier)
+				callee: (identifier)
 				labeledArg: (identifier)
 				labeledArg: (identifier)
 			)
@@ -219,7 +219,7 @@ val = 1 |> f(%)
 				(binary_expr
 				  lhs: (number)
 				  operator: (binary_operator)
-				  rhs: (fn_call (identifier) unlabeledFirstArg: (pipe_sub))
+				  rhs: (fn_call callee: (identifier) unlabeledArg: (pipe_sub))
 				)
 			)
 		)
