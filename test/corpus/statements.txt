@@ -193,3 +193,38 @@ val = 1 |> f(%)
 	)
 )
 
+
+==================
+Imports
+==================
+
+import "tests/inputs/cube.obj"
+
+---
+
+(kcl_program
+	(body_item
+		(import_stmt
+			(string)
+		)
+	)
+)
+
+
+==================
+Import with as
+==================
+
+import "tests/inputs/cube.obj" as cube
+
+---
+
+(kcl_program
+	(body_item
+		(import_stmt
+			(string)
+			(identifier)
+		)
+	)
+)
+

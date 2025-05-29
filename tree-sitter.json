@@ -1,0 +1,40 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "kcl",
+      "camelcase": "Kcl",
+      "title": "KCL",
+      "scope": "source.kcl",
+      "file-types": [
+        "kcl"
+      ],
+      "injection-regex": "^kcl$",
+      "class-name": "TreeSitterKcl"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "KittyCAD language",
+    "authors": [
+      {
+        "name": "Adam Chalmers",
+        "email": "adam.chalmers@zoo.dev",
+        "url": "https://adamchalmers.com/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/KittyCAD/tree-sitter-kcl"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

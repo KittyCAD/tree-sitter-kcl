@@ -22,13 +22,22 @@ module.exports = grammar({
 
   rules: {
 
-    kcl_program: $ => repeat($.body_item),
+    kcl_program: $ => seq(
+      optional(field("shebang", $.shebang)),
+      repeat($.body_item),
+    ),
 
     body_item: $ => choice(
       $.expr_stmt,
       $.variable_declaration,
       $.return_stmt,
+      $.comment,
+      $.import_stmt,
     ),
+
+    shebang: (_) => /#![^\n]*/,
+
+    import_stmt: $ => seq("import", $.string, optional(seq("as", $.identifier))),
 
     expr_stmt: $ => $._expr,
 
@@ -186,8 +195,27 @@ module.exports = grammar({
 
       return token(decimalLiteral);
     },
+
+    comment: ($) =>
+      seq(
+        "//",
+        optional(
+          field(
+            "marker",
+            choice($.module_doc_comment_marker, $.decl_doc_comment_marker),
+          ),
+        ),
+        $._comment_body,
+      ),
+
+    module_comments: ($) => repeat1(seq("//!", $._comment_body)),
+    doc_comments: ($) => repeat1(seq("///", $._comment_body)),
+    module_doc_comment_marker: (_) => token.immediate(prec(2, "!")),
+    decl_doc_comment_marker: (_) => token.immediate(prec(2, "/")),
+    _comment_body: (_) => token.immediate(/[^\n]*/),
   }
 
+  
 
 });
 /**

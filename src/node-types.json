@@ -100,7 +100,15 @@
       "required": true,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "expr_stmt",
+          "named": true
+        },
+        {
+          "type": "import_stmt",
           "named": true
         },
         {
@@ -118,6 +126,26 @@
     "type": "boolean",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "comment",
+    "named": true,
+    "fields": {
+      "marker": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "decl_doc_comment_marker",
+            "named": true
+          },
+          {
+            "type": "module_doc_comment_marker",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "expr_stmt",
@@ -278,10 +306,40 @@
     }
   },
   {
+    "type": "import_stmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "kcl_program",
     "named": true,
     "root": true,
-    "fields": {},
+    "fields": {
+      "shebang": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "shebang",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
@@ -506,11 +564,23 @@
     "named": false
   },
   {
+    "type": "//",
+    "named": false
+  },
+  {
     "type": "=",
     "named": false
   },
   {
+    "type": "as",
+    "named": false
+  },
+  {
     "type": "binary_operator",
+    "named": true
+  },
+  {
+    "type": "decl_doc_comment_marker",
     "named": true
   },
   {
@@ -530,12 +600,24 @@
     "named": true
   },
   {
+    "type": "import",
+    "named": false
+  },
+  {
+    "type": "module_doc_comment_marker",
+    "named": true
+  },
+  {
     "type": "number",
     "named": true
   },
   {
     "type": "return",
     "named": false
+  },
+  {
+    "type": "shebang",
+    "named": true
   },
   {
     "type": "true",
