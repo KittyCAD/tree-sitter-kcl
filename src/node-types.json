@@ -332,6 +332,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "param_list",
+          "named": true
         }
       ]
     }
@@ -485,6 +489,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "param_list",
+    "named": true,
+    "fields": {
+      "param": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -695,6 +715,10 @@
   {
     "type": "escape_sequence",
     "named": true
+  },
+  {
+    "type": "export",
+    "named": false
   },
   {
     "type": "false",

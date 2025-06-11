@@ -41,19 +41,27 @@ module.exports = grammar({
 
     expr_stmt: $ => $._expr,
 
-    variable_declaration: $ => choice(
-      $.fn_definition,
-      $.non_fn_definition,
+    variable_declaration: $ => seq(
+      optional('export'),
+      choice(
+        $.fn_definition,
+        $.non_fn_definition,
+      )
     ),
 
     fn_definition: $ => seq(
       'fn',
       $.identifier,
-      '(',
-      ')',
+      $.param_list,
       '{',
       repeat($.body_item),
       '}',
+    ),
+
+    param_list: $ => seq(
+      '(',
+      commaSep(choice(field("param", $.identifier))),
+      ')',
     ),
 
     identifier: $ =>
