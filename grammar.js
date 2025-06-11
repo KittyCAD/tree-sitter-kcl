@@ -60,7 +60,7 @@ module.exports = grammar({
 
     param_list: $ => seq(
       '(',
-      commaSep(choice(field("param", $.identifier))),
+      commaSep(choice(field("param", seq(optional("@"), $.identifier)))),
       ')',
     ),
 

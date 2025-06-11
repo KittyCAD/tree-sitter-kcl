@@ -271,7 +271,7 @@ import "tests/inputs/cube.obj" as cube
 With exports
 ==================
 
-export fn circle(x, y) { return 1 }
+export fn circle(@x, y) { return 1 }
 
 ---
 
