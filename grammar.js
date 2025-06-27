@@ -61,13 +61,13 @@ module.exports = grammar({
 
     param_list: $ => seq(
       '(',
-      commaSep(field("param", $.param)),
+      commaSep($.param),
       ')',
     ),
 
     param: $ => seq(optional("@"), $.identifier, optional(seq(":", $.type_name))),
 
-    type_name: $ => $.identifier,
+    type_name: $ => seq($.identifier, optional(seq("(", field("units", $.identifier), ")"))),
 
     identifier: $ =>
       /[a-zA-Z][a-zA-Z0-9]*/,

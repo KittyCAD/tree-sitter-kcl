@@ -517,17 +517,16 @@
   {
     "type": "param_list",
     "named": true,
-    "fields": {
-      "param": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "param",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "param",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -663,7 +662,18 @@
   {
     "type": "type_name",
     "named": true,
-    "fields": {},
+    "fields": {
+      "units": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
