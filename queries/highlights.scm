@@ -1,40 +1,11 @@
-;; Maps AST nodes (left) to 
-(identifier) @variable
-
-[
-; "if",
-; "else",
-; "for",
-; "while",
-"return"
-; "break",
-; "continue",
-"fn"
-; "let",
-; "mut",
-; "as",
-; "loop",
-; "nil",
-; "and",
-; "or",
-; "not",
-; "var",
-; "const",
-; "import",
-; "export",
-; "type",
-; "interface",
-; "new",
-; "self",
-; "from",
-; "record",
-; "struct",
-; "object",
-] @keyword
+;; Maps AST nodes (left) to highlighting classes (right)
+;; See https://docs.helix-editor.com/themes.html#scopes
+;; for the supported scopes.
 
 "fn" @keyword.function
-
+"return" @keyword.return
 "import" @keyword.import
+"export" @keyword.import
 
 ; [
 ;  "if"
@@ -46,6 +17,11 @@
   (labeledArg
     label: (identifier) @variable.parameter
   )
+)
+
+;; highlight type names
+(type_name
+  (identifier) @type
 )
 
 ;; operators
@@ -76,3 +52,6 @@
 ;; comments
 (shebang) @keyword.directive
 (comment) @comment
+
+(identifier) @variable
+
