@@ -53,6 +53,7 @@ module.exports = grammar({
       'fn',
       $.identifier,
       $.param_list,
+      optional(seq(":", $.type_name)),
       '{',
       repeat($.body_item),
       '}',
@@ -60,9 +61,11 @@ module.exports = grammar({
 
     param_list: $ => seq(
       '(',
-      commaSep(choice(field("param", seq(optional("@"), $.identifier)))),
+      commaSep(field("param", seq(optional("@"), $.identifier, optional(seq(":", $.type_name))))),
       ')',
     ),
+
+    type_name: $ => $.identifier,
 
     identifier: $ =>
       /[a-zA-Z][a-zA-Z0-9]*/,

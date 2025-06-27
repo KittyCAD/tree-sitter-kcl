@@ -1,1 +1,1 @@
-tree-sitter generate && tree-sitter test -i Assignment
+tree-sitter generate && tree-sitter test

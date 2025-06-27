@@ -294,3 +294,28 @@ export fn circle(@x, y) { return 1 }
 	)
 )
 
+==================
+Function signatures
+==================
+
+fn circle(@x: number, y: number): string {}
+
+---
+
+(kcl_program
+	(body_item
+		(variable_declaration
+			(fn_definition
+				(identifier)
+				(param_list
+					(identifier)
+					(type_name (identifier))
+					(identifier)
+					(type_name (identifier))
+				)
+				(type_name (identifier))
+			)
+		)
+	)
+)
+
