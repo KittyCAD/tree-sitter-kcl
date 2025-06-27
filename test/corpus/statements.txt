@@ -281,8 +281,8 @@ export fn circle(@x, y) { return 1 }
 			(fn_definition
 				(identifier)
 				(param_list
-					(identifier)
-					(identifier)
+					(param (identifier))
+					(param (identifier))
 				)
 				(body_item
 					(return_stmt
@@ -308,10 +308,14 @@ fn circle(@x: number, y: number): string {}
 			(fn_definition
 				(identifier)
 				(param_list
-					(identifier)
-					(type_name (identifier))
-					(identifier)
-					(type_name (identifier))
+					(param
+						(identifier)
+						(type_name (identifier))
+					)
+					(param
+						(identifier)
+						(type_name (identifier))
+					)
 				)
 				(type_name (identifier))
 			)
