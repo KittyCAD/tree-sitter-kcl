@@ -323,3 +323,50 @@ fn circle(@x: number(Length), y: number): string {}
 	)
 )
 
+==================
+Function signatures with optional
+==================
+
+fn circle(y?: number) {}
+
+---
+
+(kcl_program
+	(body_item
+		(variable_declaration
+			(fn_definition
+				(identifier)
+				(param_list
+					(param
+						(identifier)
+						(type_name (identifier))
+					)
+				)
+			)
+		)
+	)
+)
+
+==================
+Function with optional
+==================
+
+fn circle(y?) {}
+
+---
+
+(kcl_program
+	(body_item
+		(variable_declaration
+			(fn_definition
+				(identifier)
+				(param_list
+					(param
+						(identifier)
+					)
+				)
+			)
+		)
+	)
+)
+

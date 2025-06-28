@@ -53,7 +53,7 @@ module.exports = grammar({
       'fn',
       $.identifier,
       $.param_list,
-      optional(seq(":", $.type_name)),
+      optional(seq(choice(":", "?:"), $.type_name)),
       '{',
       repeat($.body_item),
       '}',
@@ -65,7 +65,7 @@ module.exports = grammar({
       ')',
     ),
 
-    param: $ => seq(optional("@"), $.identifier, optional(seq(":", $.type_name))),
+    param: $ => seq(optional("@"), $.identifier, optional("?"), optional(seq(":", $.type_name))),
 
     type_name: $ => seq($.identifier, optional(seq("(", field("units", $.identifier), ")"))),
 
