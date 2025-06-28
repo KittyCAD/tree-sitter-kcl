@@ -11,6 +11,12 @@
 ;  "if"
 ;  "else"
 ;  ] @keyword.conditional
+(identifier) @variable
+
+;; highlight type names
+(type_name
+  (identifier) @type
+) @type
 
 (fn_call
   callee: (identifier) @function
@@ -19,10 +25,6 @@
   )
 )
 
-;; highlight type names
-(type_name
-  (identifier) @type
-)
 
 ;; operators
 (binary_operator) @operator
@@ -47,11 +49,10 @@
 ;; literals
 (boolean) @constant.builtin.boolean
 (string) @string
-(number) @constant.builtin.numeric
+(number) @constant.numeric
 
 ;; comments
 (shebang) @keyword.directive
 (comment) @comment
 
-(identifier) @variable
 
