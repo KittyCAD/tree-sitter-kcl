@@ -1,5 +1,35 @@
 [
   {
+    "type": "annotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_kv",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "annotation_kv",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "array_expr",
     "named": true,
     "fields": {},
@@ -384,6 +414,10 @@
       "required": false,
       "types": [
         {
+          "type": "annotation",
+          "named": true
+        },
+        {
           "type": "body_item",
           "named": true
         }
@@ -754,6 +788,10 @@
   },
   {
     "type": "@",
+    "named": false
+  },
+  {
+    "type": "@(",
     "named": false
   },
   {
