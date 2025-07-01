@@ -370,3 +370,24 @@ fn circle(y?) {}
 	)
 )
 
+==================
+Annotation
+==================
+
+@(impl = foo, other = bar)
+x = 2
+
+---
+
+(kcl_program
+	(annotation (annotation_kv (identifier) (identifier)) (annotation_kv (identifier) (identifier)))
+	(body_item
+		(variable_declaration
+			(non_fn_definition
+				(identifier)
+				(number)
+			)
+		)
+	)
+)
+

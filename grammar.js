@@ -24,7 +24,7 @@ module.exports = grammar({
 
     kcl_program: $ => seq(
       optional(field("shebang", $.shebang)),
-      repeat($.body_item),
+      repeat(seq(optional($.annotation), $.body_item)),
     ),
 
     body_item: $ => choice(
@@ -71,8 +71,12 @@ module.exports = grammar({
 
     _one_type: $ => seq($.identifier, optional(seq("(", field("units", $.identifier), ")"))),
 
+    annotation: $ => seq("@(", $.annotation_kv, optional(seq(",", $.annotation_kv)), ")"),
+
+    annotation_kv: $ => seq($.identifier, "=", $.identifier),
+
     identifier: $ =>
-      /[a-zA-Z][a-zA-Z0-9]*/,
+      /[a-zA-Z_][a-zA-Z0-9_]*/,
 
     _expr: $ => choice(
       $.number,
