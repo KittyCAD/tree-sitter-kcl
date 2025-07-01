@@ -664,7 +664,7 @@
     "named": true,
     "fields": {
       "units": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -675,7 +675,7 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -822,6 +822,10 @@
   },
   {
     "type": "{",
+    "named": false
+  },
+  {
+    "type": "|",
     "named": false
   },
   {

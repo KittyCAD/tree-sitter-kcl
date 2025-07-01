@@ -298,7 +298,7 @@ export fn circle(@x, y) { return 1 }
 Function signatures
 ==================
 
-fn circle(@x: number(Length), y: number): string {}
+fn circle(@x: number(Length), y: number | string): string {}
 
 ---
 
@@ -314,7 +314,7 @@ fn circle(@x: number(Length), y: number): string {}
 					)
 					(param
 						(identifier)
-						(type_name (identifier))
+						(type_name (identifier) (identifier))
 					)
 				)
 				(type_name (identifier))

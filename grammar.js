@@ -67,7 +67,9 @@ module.exports = grammar({
 
     param: $ => seq(optional("@"), $.identifier, optional("?"), optional(seq(":", $.type_name))),
 
-    type_name: $ => seq($.identifier, optional(seq("(", field("units", $.identifier), ")"))),
+    type_name: $ => seq($._one_type, repeat(seq("|", $._one_type))),
+
+    _one_type: $ => seq($.identifier, optional(seq("(", field("units", $.identifier), ")"))),
 
     identifier: $ =>
       /[a-zA-Z][a-zA-Z0-9]*/,
