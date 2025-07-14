@@ -11,9 +11,21 @@ on:
       - ".github/workflows/ci.yml"
 
 jobs:
+  check-no-gen-changes:
+    name: Check that src is up to date
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+      - uses: taiki-e/install-action@just
+      - name: Run tests
+        run: just check-no-gen-changes
+
   test:
     name: Test parser
-    runs-on: "ubuntu-latest"
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
