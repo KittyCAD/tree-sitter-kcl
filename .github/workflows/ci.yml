@@ -11,6 +11,12 @@ on:
       - ".github/workflows/ci.yml"
 
 jobs:
+
+  is-formatted:
+    name: Check formatter was run
+    steps:
+     - uses: biomejs/setup-biome@v2
+     - run: biome ci
   check-no-gen-changes:
     name: Check that src is up to date
     runs-on: ubuntu-latest
