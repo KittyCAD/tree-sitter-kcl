@@ -15,4 +15,4 @@ Typical workflow:
  - Consider updating [`highlights.scm`](https://github.com/KittyCAD/tree-sitter-kcl/blob/main/queries/highlights.scm) to highlight whatever you added properly. No need to, this is strictly optional.
  - Open a PR.
 
-You can also launch the tree-sitter playground with `just test`, then paste in some KCL and see where it's failing.
+You can also launch the tree-sitter playground with `just playground`, then paste in some KCL and see where it's failing.
