@@ -24,3 +24,5 @@ check-no-gen-changes:
     just generate
     git diff --exit-code src
 
+fmt:
+    npx @biomejs/biome format --write grammar.js
