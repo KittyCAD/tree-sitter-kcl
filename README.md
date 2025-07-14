@@ -4,6 +4,12 @@ Treesitter is a grammar generator which helps write IDE tools. For example, Neov
 
 ## Developing
 
+## Setting up your dev environment
+
+You need `tree-sitter`. If you want to use its playground, install `emscripten` too. If you're using Homebrew, install `just` and then run `just install-deps-homebrew`. Other people, install the deps yourself.
+
+## Development workflow
+
 Use `just test` to check your code. 
 
 Typical workflow:
