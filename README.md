@@ -14,6 +14,8 @@ If you want to use tree-sitter's interactive playground, install [`emscripten`](
 
 ## Development workflow
 
+Before contributing, you might want to quickly read [the tree-sitter "Creating Parsers" guide](https://tree-sitter.github.io/tree-sitter/creating-parsers/1-getting-started.html).
+
 Use `just test` to check your code. 
 
 Typical workflow:
