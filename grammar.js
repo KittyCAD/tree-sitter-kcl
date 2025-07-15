@@ -58,7 +58,12 @@ module.exports = grammar({
 			),
 
 		param_list: ($) =>
-			seq("(", commaSep(seq(repeat($.comment), $.param)), optional(","), ")"),
+			seq(
+				"(",
+				commaSep(seq(repeat(choice($.annotation, $.comment)), $.param)),
+				optional(","),
+				")",
+			),
 
 		param: ($) =>
 			seq(

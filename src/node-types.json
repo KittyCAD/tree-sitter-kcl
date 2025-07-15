@@ -679,6 +679,10 @@
       "required": false,
       "types": [
         {
+          "type": "annotation",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },

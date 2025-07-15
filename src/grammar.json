@@ -225,8 +225,17 @@
                     {
                       "type": "REPEAT",
                       "content": {
-                        "type": "SYMBOL",
-                        "name": "comment"
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "annotation"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "comment"
+                          }
+                        ]
                       }
                     },
                     {
@@ -250,8 +259,17 @@
                           {
                             "type": "REPEAT",
                             "content": {
-                              "type": "SYMBOL",
-                              "name": "comment"
+                              "type": "CHOICE",
+                              "members": [
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "annotation"
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "comment"
+                                }
+                              ]
                             }
                           },
                           {

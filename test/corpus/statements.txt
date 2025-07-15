@@ -418,11 +418,12 @@ x = if true { 1 } else if true { 0 } else { 2 }
 )
 
 ==================
-Comments on params
+Params with metadata
 ==================
 
 fn planeOf(
-  /// Comment
+  /// Docstring
+  @(includeInSnippet = true)
   @solid: Solid,
 ) {}
 
@@ -435,6 +436,7 @@ fn planeOf(
 				(identifier)
 				(param_list
 					(comment)
+					(annotation (annotation_kv (identifier) (identifier)))
 					(param (identifier) (type_name (identifier)))
 				)
 			)
