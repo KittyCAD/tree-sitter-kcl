@@ -679,6 +679,14 @@
       "required": false,
       "types": [
         {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "param",
           "named": true
         }
@@ -898,6 +906,10 @@
   },
   {
     "type": "//",
+    "named": false
+  },
+  {
+    "type": "///",
     "named": false
   },
   {

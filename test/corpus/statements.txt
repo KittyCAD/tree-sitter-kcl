@@ -417,3 +417,30 @@ x = if true { 1 } else if true { 0 } else { 2 }
 	)
 )
 
+==================
+Params with metadata
+==================
+
+fn planeOf(
+  /// Docstring
+  @(includeInSnippet = true)
+  @solid: Solid,
+) {}
+
+---
+
+(kcl_program
+	(body_item
+		(variable_declaration
+			(fn_definition
+				(identifier)
+				(param_list
+					(comment)
+					(annotation (annotation_kv (identifier) (identifier)))
+					(param (identifier) (type_name (identifier)))
+				)
+			)
+		)
+	)
+)
+
