@@ -1,3 +1,8 @@
 node_modules
 *.dylib
 *.dylib.DSYM
+/build/Release
+/target
+
+# macOS
+.DS_Store
