@@ -6,6 +6,7 @@ on:
       - grammar.js
       - src/**
       - test/**
+      - queries/**
       - bindings/**
       - binding.gyp
       - ".github/workflows/ci.yml"
