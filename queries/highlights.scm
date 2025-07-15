@@ -3,14 +3,13 @@
 ;; for the supported scopes.
 
 "fn" @keyword.function
-"return" @keyword.return
-"import" @keyword.import
-"export" @keyword.import
-
-; [
-;  "if"
-;  "else"
-;  ] @keyword.conditional
+"return" @keyword.control.return
+"import" @keyword.control.import
+"export" @keyword.control.import
+[
+ "if"
+ "else"
+ ] @keyword.control.conditional
 (identifier) @variable
 
 ;; highlight type names
