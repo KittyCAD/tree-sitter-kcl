@@ -220,8 +220,20 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "param"
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "REPEAT",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "comment"
+                      }
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "param"
+                    }
+                  ]
                 },
                 {
                   "type": "REPEAT",
@@ -233,13 +245,37 @@
                         "value": ","
                       },
                       {
-                        "type": "SYMBOL",
-                        "name": "param"
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "REPEAT",
+                            "content": {
+                              "type": "SYMBOL",
+                              "name": "comment"
+                            }
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "param"
+                          }
+                        ]
                       }
                     ]
                   }
                 }
               ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ","
             },
             {
               "type": "BLANK"
@@ -1643,8 +1679,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "//"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "///"
+            },
+            {
+              "type": "STRING",
+              "value": "//"
+            }
+          ]
         },
         {
           "type": "CHOICE",

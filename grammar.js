@@ -57,7 +57,8 @@ module.exports = grammar({
 				"}",
 			),
 
-		param_list: ($) => seq("(", commaSep($.param), ")"),
+		param_list: ($) =>
+			seq("(", commaSep(seq(repeat($.comment), $.param)), optional(","), ")"),
 
 		param: ($) =>
 			seq(
@@ -230,7 +231,7 @@ module.exports = grammar({
 
 		comment: ($) =>
 			seq(
-				"//",
+				choice("///", "//"),
 				optional(
 					field(
 						"marker",

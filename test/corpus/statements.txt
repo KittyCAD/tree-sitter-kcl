@@ -417,3 +417,28 @@ x = if true { 1 } else if true { 0 } else { 2 }
 	)
 )
 
+==================
+Comments on params
+==================
+
+fn planeOf(
+  /// Comment
+  @solid: Solid,
+) {}
+
+---
+
+(kcl_program
+	(body_item
+		(variable_declaration
+			(fn_definition
+				(identifier)
+				(param_list
+					(comment)
+					(param (identifier) (type_name (identifier)))
+				)
+			)
+		)
+	)
+)
+
