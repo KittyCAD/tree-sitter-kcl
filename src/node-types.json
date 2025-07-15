@@ -58,6 +58,10 @@
           "named": true
         },
         {
+          "type": "if_expr",
+          "named": true
+        },
+        {
           "type": "number",
           "named": true
         },
@@ -102,6 +106,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "if_expr",
             "named": true
           },
           {
@@ -154,6 +162,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "if_expr",
             "named": true
           },
           {
@@ -261,6 +273,10 @@
           "named": true
         },
         {
+          "type": "if_expr",
+          "named": true
+        },
+        {
           "type": "number",
           "named": true
         },
@@ -318,6 +334,10 @@
             "named": true
           },
           {
+            "type": "if_expr",
+            "named": true
+          },
+          {
             "type": "number",
             "named": true
           },
@@ -372,6 +392,100 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "if_expr",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "array_expr",
+            "named": true
+          },
+          {
+            "type": "binary_expr",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "fn_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "if_expr",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "pipe_sub",
+            "named": true
+          },
+          {
+            "type": "prefix_expr",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "else_clause": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          },
+          {
+            "type": "body_item",
+            "named": true
+          }
+        ]
+      },
+      "else_if_clause": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          },
+          {
+            "type": "body_item",
+            "named": true
+          }
+        ]
+      },
+      "if_clause": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          },
+          {
+            "type": "body_item",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -453,6 +567,10 @@
             "named": true
           },
           {
+            "type": "if_expr",
+            "named": true
+          },
+          {
             "type": "number",
             "named": true
           },
@@ -508,6 +626,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_expr",
           "named": true
         },
         {
@@ -597,6 +719,10 @@
             "named": true
           },
           {
+            "type": "if_expr",
+            "named": true
+          },
+          {
             "type": "number",
             "named": true
           },
@@ -657,6 +783,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_expr",
           "named": true
         },
         {
@@ -815,6 +945,14 @@
     "named": true
   },
   {
+    "type": "else",
+    "named": false
+  },
+  {
+    "type": "else if",
+    "named": false
+  },
+  {
     "type": "escape_sequence",
     "named": true
   },
@@ -833,6 +971,10 @@
   {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "if",
+    "named": false
   },
   {
     "type": "import",

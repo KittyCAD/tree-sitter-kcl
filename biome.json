@@ -1,0 +1,5 @@
+{
+	"files": {
+		"includes": ["grammar.js", "biome.json"]
+	}
+}

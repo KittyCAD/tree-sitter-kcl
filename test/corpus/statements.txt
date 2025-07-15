@@ -391,3 +391,29 @@ x = 2
 	)
 )
 
+
+==================
+If
+==================
+
+x = if true { 1 } else if true { 0 } else { 2 }
+
+---
+
+(kcl_program
+	(body_item
+		(variable_declaration
+			(non_fn_definition
+				(identifier)
+				(if_expr
+				condition:      (boolean)
+				if_clause:      (body_item (expr_stmt (number)))
+				condition:      (boolean)
+				else_if_clause: (body_item (expr_stmt (number)))
+				else_clause:    (body_item (expr_stmt (number)))
+				)
+			)
+		)
+	)
+)
+
