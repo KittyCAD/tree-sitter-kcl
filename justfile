@@ -27,6 +27,9 @@ check-no-gen-changes:
 fmt:
     npx @biomejs/biome format --write grammar.js
 
+lint:
+    npx @biomejs/biome lint grammar.js
+
 fmt-helix:
     npx @biomejs/biome format --write --stdin-file-path=foo.ts
 
