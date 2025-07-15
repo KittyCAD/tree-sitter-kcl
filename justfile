@@ -30,7 +30,3 @@ fmt:
 fmt-helix:
     npx @biomejs/biome format --write --stdin-file-path=foo.ts
 
-install-deps-homebrew:
-    brew install emscripten
-    brew install tree-sitter
-
