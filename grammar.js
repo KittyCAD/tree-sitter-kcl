@@ -81,6 +81,7 @@ module.exports = grammar({
 
 		_expr: ($) =>
 			choice(
+				$.if_expr,
 				$.number,
 				$.string,
 				$.boolean,
@@ -95,6 +96,31 @@ module.exports = grammar({
 		array_expr: ($) => seq("[", optional(commaSep($._expr)), "]"),
 
 		pipe_sub: (_) => "%",
+
+		if_expr: ($) =>
+			seq(
+				"if",
+				field("condition", $._expr),
+				"{",
+				field("if_clause", repeat(seq(optional($.annotation), $.body_item))),
+				"}",
+				repeat(
+					seq(
+						"else if",
+						field("condition", $._expr),
+						"{",
+						field(
+							"else_if_clause",
+							repeat(seq(optional($.annotation), $.body_item)),
+						),
+						"}",
+					),
+				),
+				"else",
+				"{",
+				field("else_clause", repeat(seq(optional($.annotation), $.body_item))),
+				"}",
+			),
 
 		fn_call: ($) =>
 			seq(
