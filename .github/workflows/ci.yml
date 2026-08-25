@@ -29,9 +29,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
+        uses: tree-sitter/setup-action/cli@v2
         with:
-          tree-sitter-ref: v0.25.8
+          tree-sitter-ref: v0.26.13
       - uses: taiki-e/install-action@just
       - name: Run tests
         run: just check-no-gen-changes
@@ -43,9 +43,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
+        uses: tree-sitter/setup-action/cli@v2
         with:
-          tree-sitter-ref: v0.25.8
+          tree-sitter-ref: v0.26.13
       - uses: taiki-e/install-action@just
       - name: Run tests
         run: just test
