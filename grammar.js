@@ -14,6 +14,7 @@ const PREC = {
 	and: 7,
 	or: 6,
 	prefix: 20,
+	member: 21,
 	pipe: 5, // |>
 };
 
@@ -24,7 +25,7 @@ module.exports = grammar({
 		kcl_program: ($) =>
 			seq(
 				optional(field("shebang", $.shebang)),
-				repeat(seq(optional($.annotation), $.body_item)),
+				repeat(choice($.annotation, $.body_item)),
 			),
 
 		body_item: ($) =>
@@ -39,7 +40,13 @@ module.exports = grammar({
 		shebang: (_) => /#![^\n]*/,
 
 		import_stmt: ($) =>
-			seq("import", $.string, optional(seq("as", $.identifier))),
+			seq(
+				"import",
+				choice(
+					seq($.string, optional(seq("as", $.identifier))),
+					seq(commaSep1($.identifier), "from", $.string),
+				),
+			),
 
 		expr_stmt: ($) => $._expr,
 
@@ -71,17 +78,51 @@ module.exports = grammar({
 				$.identifier,
 				optional("?"),
 				optional(seq(":", $.type_name)),
+				optional(seq("=", field("default", $._expr))),
 			),
 
 		type_name: ($) => seq($._one_type, repeat(seq("|", $._one_type))),
 
 		_one_type: ($) =>
-			seq($.identifier, optional(seq("(", field("units", $.identifier), ")"))),
+			choice(
+				seq(
+					$.identifier,
+					optional(seq("(", field("units", $.identifier), ")")),
+				),
+				$.array_type,
+				$.function_type,
+				$.object_type,
+			),
+
+		array_type: ($) =>
+			seq(
+				"[",
+				$.type_name,
+				optional(seq(";", field("length", $.number), optional("+"))),
+				"]",
+			),
+
+		function_type: ($) =>
+			seq("fn", "(", commaSep($.type_name), ")", ":", $._one_type),
+
+		object_type: (_) => seq("{", "}"),
 
 		annotation: ($) =>
-			seq("@(", $.annotation_kv, optional(seq(",", $.annotation_kv)), ")"),
+			choice(
+				prec(1, seq("@", $.identifier, $._annotation_properties)),
+				prec(-1, seq("@", $.identifier)),
+				seq("@", $._annotation_properties),
+			),
 
-		annotation_kv: ($) => seq($.identifier, "=", $.identifier),
+		_annotation_properties: ($) =>
+			seq("(", commaSep1($.annotation_kv), optional(","), ")"),
+
+		annotation_kv: ($) =>
+			seq(
+				$.identifier,
+				"=",
+				choice($.identifier, $.number, $.string, $.array_expr),
+			),
 
 		identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
@@ -95,11 +136,25 @@ module.exports = grammar({
 				$.binary_expr,
 				$.prefix_expr,
 				$.array_expr,
+				$.member_expr,
 				$.fn_call,
+				$.sketch_block,
+				$.sketch_var,
 				$.pipe_sub,
 			),
 
 		array_expr: ($) => seq("[", optional(commaSep($._expr)), "]"),
+
+		member_expr: ($) =>
+			prec.left(
+				PREC.member,
+				seq(
+					field("object", $.identifier),
+					repeat1(seq(".", field("property", $.identifier))),
+				),
+			),
+
+		sketch_var: ($) => prec.right(seq("var", optional($.number))),
 
 		pipe_sub: (_) => "%",
 
@@ -128,9 +183,13 @@ module.exports = grammar({
 				"}",
 			),
 
-		fn_call: ($) =>
+		fn_call: ($) => seq(field("callee", $.identifier), $._call_arguments),
+
+		sketch_block: ($) =>
+			prec(1, seq("sketch", $._call_arguments, "{", repeat($.body_item), "}")),
+
+		_call_arguments: ($) =>
 			seq(
-				field("callee", $.identifier),
 				"(",
 				commaSep(choice(field("unlabeledArg", $._expr), $.labeledArg)),
 				")",
@@ -145,16 +204,24 @@ module.exports = grammar({
 
 		non_fn_definition: ($) => seq($.identifier, "=", $._expr),
 
-		string: ($) => choice(seq('"', '"'), seq('"', $._string_content, '"')),
+		string: ($) =>
+			choice(
+				seq('"', optional($._string_content), '"'),
+				seq("'", optional($._single_string_content), "'"),
+			),
 
 		boolean: (_) => choice("true", "false"),
 
 		_string_content: ($) =>
 			repeat1(choice($._normal_string_content, $.escape_sequence)),
+		_single_string_content: ($) =>
+			repeat1(choice($._normal_single_string_content, $.escape_sequence)),
 
 		_normal_string_content: (_) => token.immediate(prec(1, /[^\\"\n]+/)),
+		_normal_single_string_content: (_) => token.immediate(prec(1, /[^\\'\n]+/)),
 
-		escape_sequence: (_) => token.immediate(seq("\\", /("|\\|\/|b|f|n|r|t|u)/)),
+		escape_sequence: (_) =>
+			token.immediate(seq("\\", /("|'|\\|\/|b|f|n|r|t|u)/)),
 		prefix_expr: ($) =>
 			prec.right(
 				PREC.prefix,
@@ -197,12 +264,12 @@ module.exports = grammar({
 
 			return choice(
 				...table.map(([fn, prec, op]) =>
-					//@ts-ignore
+					//@ts-expect-error
 					fn(
 						prec,
 						seq(
 							field("lhs", $._expr),
-							//@ts-ignore
+							//@ts-expect-error
 							field("operator", alias(op, $.binary_operator)),
 							field("rhs", $._expr),
 						),
@@ -231,7 +298,7 @@ module.exports = grammar({
 				seq(decimalIntegerLiteral, optional(exponentPart)),
 			);
 
-			return token(decimalLiteral);
+			return token(seq(decimalLiteral, optional(/[a-zA-Z]+/)));
 		},
 
 		comment: ($) =>
