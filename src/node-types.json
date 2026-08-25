@@ -303,26 +303,6 @@
     "fields": {}
   },
   {
-    "type": "comment",
-    "named": true,
-    "fields": {
-      "marker": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "decl_doc_comment_marker",
-            "named": true
-          },
-          {
-            "type": "module_doc_comment_marker",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "expr_stmt",
     "named": true,
     "fields": {},
@@ -1316,14 +1296,6 @@
     "named": false
   },
   {
-    "type": "//",
-    "named": false
-  },
-  {
-    "type": "///",
-    "named": false
-  },
-  {
     "type": ":",
     "named": false
   },
@@ -1364,7 +1336,7 @@
     "named": true
   },
   {
-    "type": "decl_doc_comment_marker",
+    "type": "comment",
     "named": true
   },
   {
@@ -1406,10 +1378,6 @@
   {
     "type": "import",
     "named": false
-  },
-  {
-    "type": "module_doc_comment_marker",
-    "named": true
   },
   {
     "type": "number",
