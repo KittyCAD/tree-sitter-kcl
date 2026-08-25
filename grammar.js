@@ -85,7 +85,10 @@ module.exports = grammar({
 
 		_one_type: ($) =>
 			choice(
-				seq($.identifier, optional(seq("(", field("units", $.identifier), ")"))),
+				seq(
+					$.identifier,
+					optional(seq("(", field("units", $.identifier), ")")),
+				),
 				$.array_type,
 				$.function_type,
 				$.object_type,
@@ -180,23 +183,10 @@ module.exports = grammar({
 				"}",
 			),
 
-		fn_call: ($) =>
-			seq(
-				field("callee", $.identifier),
-				$._call_arguments,
-			),
+		fn_call: ($) => seq(field("callee", $.identifier), $._call_arguments),
 
 		sketch_block: ($) =>
-			prec(
-				1,
-				seq(
-					"sketch",
-					$._call_arguments,
-					"{",
-					repeat($.body_item),
-					"}",
-				),
-			),
+			prec(1, seq("sketch", $._call_arguments, "{", repeat($.body_item), "}")),
 
 		_call_arguments: ($) =>
 			seq(
@@ -274,12 +264,12 @@ module.exports = grammar({
 
 			return choice(
 				...table.map(([fn, prec, op]) =>
-					//@ts-ignore
+					//@ts-expect-error
 					fn(
 						prec,
 						seq(
 							field("lhs", $._expr),
-							//@ts-ignore
+							//@ts-expect-error
 							field("operator", alias(op, $.binary_operator)),
 							field("rhs", $._expr),
 						),
