@@ -14,6 +14,7 @@ const PREC = {
 	and: 7,
 	or: 6,
 	prefix: 20,
+	member: 21,
 	pipe: 5, // |>
 };
 
@@ -107,11 +108,25 @@ module.exports = grammar({
 				$.binary_expr,
 				$.prefix_expr,
 				$.array_expr,
+				$.member_expr,
 				$.fn_call,
+				$.sketch_block,
+				$.sketch_var,
 				$.pipe_sub,
 			),
 
 		array_expr: ($) => seq("[", optional(commaSep($._expr)), "]"),
+
+		member_expr: ($) =>
+			prec.left(
+				PREC.member,
+				seq(
+					field("object", $.identifier),
+					repeat1(seq(".", field("property", $.identifier))),
+				),
+			),
+
+		sketch_var: ($) => prec.right(seq("var", optional($.number))),
 
 		pipe_sub: (_) => "%",
 
@@ -143,6 +158,23 @@ module.exports = grammar({
 		fn_call: ($) =>
 			seq(
 				field("callee", $.identifier),
+				$._call_arguments,
+			),
+
+		sketch_block: ($) =>
+			prec(
+				1,
+				seq(
+					"sketch",
+					$._call_arguments,
+					"{",
+					repeat($.body_item),
+					"}",
+				),
+			),
+
+		_call_arguments: ($) =>
+			seq(
 				"(",
 				commaSep(choice(field("unlabeledArg", $._expr), $.labeledArg)),
 				")",
@@ -243,7 +275,7 @@ module.exports = grammar({
 				seq(decimalIntegerLiteral, optional(exponentPart)),
 			);
 
-			return token(decimalLiteral);
+			return token(seq(decimalLiteral, optional(/[a-zA-Z]+/)));
 		},
 
 		comment: ($) =>

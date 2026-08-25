@@ -445,6 +445,153 @@ fn planeOf(
 )
 
 ==================
+Sketch block
+==================
+
+sketch001 = sketch(on = XY) {
+  line1 = line(start = [var -2.11mm, var -4.63mm], end = [var 0mm, var 8.75mm])
+  vertical([line1.end, ORIGIN])
+  line2 = line(start = [var 0mm, var 8.75mm], end = [var 2.43mm, var -4.17mm])
+  coincident([line1.end, line2.start])
+  line3 = line(start = [var 2.43mm, var -4.17mm], end = [var -2.11mm, var -4.63mm])
+  coincident([line2.end, line3.start])
+  coincident([line3.end, line1.start])
+}
+region001 = region(segments = [sketch001.line1, sketch001.line2], direction = CW)
+
+---
+
+(kcl_program
+  (body_item
+    (variable_declaration
+      (non_fn_definition
+        (identifier)
+        (sketch_block
+          (labeledArg
+            (identifier)
+            (identifier))
+          (body_item
+            (variable_declaration
+              (non_fn_definition
+                (identifier)
+                (fn_call
+                  (identifier)
+                  (labeledArg
+                    (identifier)
+                    (array_expr
+                      (sketch_var
+                        (number))
+                      (sketch_var
+                        (number))))
+                  (labeledArg
+                    (identifier)
+                    (array_expr
+                      (sketch_var
+                        (number))
+                      (sketch_var
+                        (number))))))))
+          (body_item
+            (expr_stmt
+              (fn_call
+                (identifier)
+                (array_expr
+                  (member_expr
+                    (identifier)
+                    (identifier))
+                  (identifier)))))
+          (body_item
+            (variable_declaration
+              (non_fn_definition
+                (identifier)
+                (fn_call
+                  (identifier)
+                  (labeledArg
+                    (identifier)
+                    (array_expr
+                      (sketch_var
+                        (number))
+                      (sketch_var
+                        (number))))
+                  (labeledArg
+                    (identifier)
+                    (array_expr
+                      (sketch_var
+                        (number))
+                      (sketch_var
+                        (number))))))))
+          (body_item
+            (expr_stmt
+              (fn_call
+                (identifier)
+                (array_expr
+                  (member_expr
+                    (identifier)
+                    (identifier))
+                  (member_expr
+                    (identifier)
+                    (identifier))))))
+          (body_item
+            (variable_declaration
+              (non_fn_definition
+                (identifier)
+                (fn_call
+                  (identifier)
+                  (labeledArg
+                    (identifier)
+                    (array_expr
+                      (sketch_var
+                        (number))
+                      (sketch_var
+                        (number))))
+                  (labeledArg
+                    (identifier)
+                    (array_expr
+                      (sketch_var
+                        (number))
+                      (sketch_var
+                        (number))))))))
+          (body_item
+            (expr_stmt
+              (fn_call
+                (identifier)
+                (array_expr
+                  (member_expr
+                    (identifier)
+                    (identifier))
+                  (member_expr
+                    (identifier)
+                    (identifier))))))
+          (body_item
+            (expr_stmt
+              (fn_call
+                (identifier)
+                (array_expr
+                  (member_expr
+                    (identifier)
+                    (identifier))
+                  (member_expr
+                    (identifier)
+                    (identifier))))))))))
+  (body_item
+    (variable_declaration
+      (non_fn_definition
+        (identifier)
+        (fn_call
+          (identifier)
+          (labeledArg
+            (identifier)
+            (array_expr
+              (member_expr
+                (identifier)
+                (identifier))
+              (member_expr
+                (identifier)
+                (identifier))))
+          (labeledArg
+            (identifier)
+            (identifier)))))))
+
+==================
 Realistic subset of KCL stdlib
 ==================
 
