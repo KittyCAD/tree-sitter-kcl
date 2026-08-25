@@ -72,6 +72,7 @@ module.exports = grammar({
 				$.identifier,
 				optional("?"),
 				optional(seq(":", $.type_name)),
+				optional(seq("=", field("default", $._expr))),
 			),
 
 		type_name: ($) => seq($._one_type, repeat(seq("|", $._one_type))),
