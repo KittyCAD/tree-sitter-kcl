@@ -301,23 +301,7 @@ module.exports = grammar({
 			return token(seq(decimalLiteral, optional(/[a-zA-Z]+/)));
 		},
 
-		comment: ($) =>
-			seq(
-				choice("///", "//"),
-				optional(
-					field(
-						"marker",
-						choice($.module_doc_comment_marker, $.decl_doc_comment_marker),
-					),
-				),
-				$._comment_body,
-			),
-
-		module_comments: ($) => repeat1(seq("//!", $._comment_body)),
-		doc_comments: ($) => repeat1(seq("///", $._comment_body)),
-		module_doc_comment_marker: (_) => token.immediate(prec(2, "!")),
-		decl_doc_comment_marker: (_) => token.immediate(prec(2, "/")),
-		_comment_body: (_) => token.immediate(/[^\n]*/),
+		comment: (_) => token(/\/\/[^\n]*(?:\n[ \t]*\/\/[^\n]*)*/),
 	},
 });
 /**

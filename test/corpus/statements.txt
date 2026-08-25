@@ -7,15 +7,11 @@ w = 3.1415
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(non_fn_definition
-				(identifier)
-				(number)
-			)
-		)
-	)
-)
+  (body_item
+    (variable_declaration
+      (non_fn_definition
+        (identifier)
+        (number)))))
 
 ==================
 Bool assignment
@@ -26,15 +22,11 @@ w = true
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(non_fn_definition
-				(identifier)
-				(boolean)
-			)
-		)
-	)
-)
+  (body_item
+    (variable_declaration
+      (non_fn_definition
+        (identifier)
+        (boolean)))))
 
 ==================
 String assignment
@@ -45,15 +37,11 @@ name = "abc"
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(non_fn_definition
-				(identifier)
-				(string)
-			)
-		)
-	)
-)
+  (body_item
+    (variable_declaration
+      (non_fn_definition
+        (identifier)
+        (string)))))
 
 ==================
 Function definition
@@ -68,36 +56,24 @@ fn f() {
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(fn_definition
-				(identifier)
-				(param_list)
-				(body_item
-					(variable_declaration
-						(non_fn_definition
-							(identifier)
-							(string)
-						)
-					)
-				)
-				(body_item
-					(variable_declaration
-						(non_fn_definition
-							(identifier)
-							(string)
-						)
-					)
-				)
-				(body_item
-					(return_stmt
-						(identifier)
-					)
-				)
-			)
-		)
-	)
-)
+  (body_item
+    (variable_declaration
+      (fn_definition
+        (identifier)
+        (param_list)
+        (body_item
+          (variable_declaration
+            (non_fn_definition
+              (identifier)
+              (string))))
+        (body_item
+          (variable_declaration
+            (non_fn_definition
+              (identifier)
+              (string))))
+        (body_item
+          (return_stmt
+            (identifier)))))))
 
 ==================
 Basic math
@@ -108,20 +84,14 @@ val = 1 + 2
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(non_fn_definition
-				(identifier)
-				(binary_expr
-				  lhs: (number)
-				  operator: (binary_operator)
-				  rhs: (number)
-				)
-			)
-		)
-	)
-)
-
+  (body_item
+    (variable_declaration
+      (non_fn_definition
+        (identifier)
+        (binary_expr
+          lhs: (number)
+          operator: (binary_operator)
+          rhs: (number))))))
 
 ==================
 Arrays
@@ -132,19 +102,13 @@ point = [0, 0]
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(non_fn_definition
-				(identifier)
-				(array_expr
-					(number)
-					(number)
-				)
-			)
-		)
-	)
-)
-
+  (body_item
+    (variable_declaration
+      (non_fn_definition
+        (identifier)
+        (array_expr
+          (number)
+          (number))))))
 
 ==================
 Chaining math
@@ -155,23 +119,17 @@ val = 1 + 2 / 4
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(non_fn_definition
-				(identifier)
-				(binary_expr
-				  lhs: (number)
-				  operator: (binary_operator)
-				  rhs: (binary_expr
-				    lhs: (number)
-					operator: (binary_operator)
-				    rhs: (number)
-				  )
-				)
-			)
-		)
-	)
-)
+  (body_item
+    (variable_declaration
+      (non_fn_definition
+        (identifier)
+        (binary_expr
+          lhs: (number)
+          operator: (binary_operator)
+          rhs: (binary_expr
+            lhs: (number)
+            operator: (binary_operator)
+            rhs: (number)))))))
 
 ==================
 Function call
@@ -183,30 +141,21 @@ yLine(length = diameter)
 ---
 
 (kcl_program
-	(body_item
-		(expr_stmt
-			(fn_call
-				callee: (identifier)
-				unlabeledArg: (number)
-				(labeledArg
-					label: (identifier)
-					arg: (number)
-				)
-			)
-		)
-	)
-	(body_item
-		(expr_stmt
-			(fn_call
-				callee: (identifier)
-				(labeledArg
-					label: (identifier)
-					arg: (identifier)
-				)
-			)
-		)
-	)
-)
+  (body_item
+    (expr_stmt
+      (fn_call
+        callee: (identifier)
+        unlabeledArg: (number)
+        (labeledArg
+          label: (identifier)
+          arg: (number)))))
+  (body_item
+    (expr_stmt
+      (fn_call
+        callee: (identifier)
+        (labeledArg
+          label: (identifier)
+          arg: (identifier))))))
 
 ==================
 Pipes
@@ -217,20 +166,16 @@ val = 1 |> f(%)
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(non_fn_definition
-				(identifier)
-				(binary_expr
-				  lhs: (number)
-				  operator: (binary_operator)
-				  rhs: (fn_call callee: (identifier) unlabeledArg: (pipe_sub))
-				)
-			)
-		)
-	)
-)
-
+  (body_item
+    (variable_declaration
+      (non_fn_definition
+        (identifier)
+        (binary_expr
+          lhs: (number)
+          operator: (binary_operator)
+          rhs: (fn_call
+            callee: (identifier)
+            unlabeledArg: (pipe_sub)))))))
 
 ==================
 Imports
@@ -241,13 +186,9 @@ import "tests/inputs/cube.obj"
 ---
 
 (kcl_program
-	(body_item
-		(import_stmt
-			(string)
-		)
-	)
-)
-
+  (body_item
+    (import_stmt
+      (string))))
 
 ==================
 Import with as
@@ -258,13 +199,10 @@ import "tests/inputs/cube.obj" as cube
 ---
 
 (kcl_program
-	(body_item
-		(import_stmt
-			(string)
-			(identifier)
-		)
-	)
-)
+  (body_item
+    (import_stmt
+      (string)
+      (identifier))))
 
 ==================
 Named imports
@@ -280,6 +218,19 @@ import Axis2d, Face from "std::types"
       (identifier)
       (identifier)
       (string))))
+
+==================
+Multiline comment
+==================
+
+/// line 1
+/// line2
+
+---
+
+(kcl_program
+  (body_item
+    (comment)))
 
 ==================
 String array in arg annotation
@@ -314,7 +265,6 @@ export fn circle(
             (type_name
               (identifier))))))))
 
-
 ==================
 With exports
 ==================
@@ -324,23 +274,18 @@ export fn circle(@x, y) { return 1 }
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(fn_definition
-				(identifier)
-				(param_list
-					(param (identifier))
-					(param (identifier))
-				)
-				(body_item
-					(return_stmt
-						(number)
-					)
-				)
-			)
-		)
-	)
-)
+  (body_item
+    (variable_declaration
+      (fn_definition
+        (identifier)
+        (param_list
+          (param
+            (identifier))
+          (param
+            (identifier)))
+        (body_item
+          (return_stmt
+            (number)))))))
 
 ==================
 Function signatures
@@ -351,25 +296,23 @@ fn circle(@x: number(Length), y: number | string): string {}
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(fn_definition
-				(identifier)
-				(param_list
-					(param
-						(identifier)
-						(type_name (identifier) units: (identifier))
-					)
-					(param
-						(identifier)
-						(type_name (identifier) (identifier))
-					)
-				)
-				(type_name (identifier))
-			)
-		)
-	)
-)
+  (body_item
+    (variable_declaration
+      (fn_definition
+        (identifier)
+        (param_list
+          (param
+            (identifier)
+            (type_name
+              (identifier)
+              units: (identifier)))
+          (param
+            (identifier)
+            (type_name
+              (identifier)
+              (identifier))))
+        (type_name
+          (identifier))))))
 
 ==================
 Function signatures with optional
@@ -380,20 +323,15 @@ fn circle(y?: number) {}
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(fn_definition
-				(identifier)
-				(param_list
-					(param
-						(identifier)
-						(type_name (identifier))
-					)
-				)
-			)
-		)
-	)
-)
+  (body_item
+    (variable_declaration
+      (fn_definition
+        (identifier)
+        (param_list
+          (param
+            (identifier)
+            (type_name
+              (identifier))))))))
 
 ==================
 Sized array types
@@ -453,19 +391,13 @@ fn circle(y?) {}
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(fn_definition
-				(identifier)
-				(param_list
-					(param
-						(identifier)
-					)
-				)
-			)
-		)
-	)
-)
+  (body_item
+    (variable_declaration
+      (fn_definition
+        (identifier)
+        (param_list
+          (param
+            (identifier)))))))
 
 ==================
 Single-quoted defaults
@@ -497,17 +429,18 @@ x = 2
 ---
 
 (kcl_program
-	(annotation (annotation_kv (identifier) (identifier)) (annotation_kv (identifier) (identifier)))
-	(body_item
-		(variable_declaration
-			(non_fn_definition
-				(identifier)
-				(number)
-			)
-		)
-	)
-)
-
+  (annotation
+    (annotation_kv
+      (identifier)
+      (identifier))
+    (annotation_kv
+      (identifier)
+      (identifier)))
+  (body_item
+    (variable_declaration
+      (non_fn_definition
+        (identifier)
+        (number)))))
 
 ==================
 If
@@ -518,21 +451,22 @@ x = if true { 1 } else if true { 0 } else { 2 }
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(non_fn_definition
-				(identifier)
-				(if_expr
-				condition:      (boolean)
-				if_clause:      (body_item (expr_stmt (number)))
-				condition:      (boolean)
-				else_if_clause: (body_item (expr_stmt (number)))
-				else_clause:    (body_item (expr_stmt (number)))
-				)
-			)
-		)
-	)
-)
+  (body_item
+    (variable_declaration
+      (non_fn_definition
+        (identifier)
+        (if_expr
+          condition: (boolean)
+          if_clause: (body_item
+            (expr_stmt
+              (number)))
+          condition: (boolean)
+          else_if_clause: (body_item
+            (expr_stmt
+              (number)))
+          else_clause: (body_item
+            (expr_stmt
+              (number))))))))
 
 ==================
 Params with metadata
@@ -547,19 +481,20 @@ fn planeOf(
 ---
 
 (kcl_program
-	(body_item
-		(variable_declaration
-			(fn_definition
-				(identifier)
-				(param_list
-					(comment)
-					(annotation (annotation_kv (identifier) (identifier)))
-					(param (identifier) (type_name (identifier)))
-				)
-			)
-		)
-	)
-)
+  (body_item
+    (variable_declaration
+      (fn_definition
+        (identifier)
+        (param_list
+          (comment)
+          (annotation
+            (annotation_kv
+              (identifier)
+              (identifier)))
+          (param
+            (identifier)
+            (type_name
+              (identifier))))))))
 
 ==================
 Sketch block
@@ -739,12 +674,6 @@ export fn fn_name(
 (kcl_program
   (body_item
     (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
   (annotation
     (identifier))
   (annotation
@@ -755,20 +684,6 @@ export fn fn_name(
     (annotation_kv
       (identifier)
       (number)))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
   (body_item
     (comment))
   (annotation
@@ -1000,12 +915,6 @@ export fn toString(
 (kcl_program
   (body_item
     (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
   (annotation
     (identifier))
   (annotation
@@ -1018,36 +927,6 @@ export fn toString(
       (number)))
   (body_item
     (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
   (annotation
     (annotation_kv
       (identifier)
@@ -1069,42 +948,6 @@ export fn toString(
           (identifier)))))
   (body_item
     (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
   (annotation
     (annotation_kv
       (identifier)
@@ -1124,50 +967,6 @@ export fn toString(
               (identifier))))
         (type_name
           (identifier)))))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
   (body_item
     (comment))
   (annotation
@@ -1202,32 +1001,25 @@ export fn toString(
           (identifier)))))
   (body_item
     (comment))
+  (annotation
+    (annotation_kv
+      (identifier)
+      (identifier))
+    (annotation_kv
+      (identifier)
+      (identifier)))
   (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
+    (variable_declaration
+      (fn_definition
+        (identifier)
+        (param_list
+          (comment)
+          (param
+            (identifier)
+            (type_name
+              (identifier))))
+        (type_name
+          (identifier)))))
   (body_item
     (comment))
   (annotation
@@ -1251,40 +1043,6 @@ export fn toString(
           (identifier)))))
   (body_item
     (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
   (annotation
     (annotation_kv
       (identifier)
@@ -1304,131 +1062,6 @@ export fn toString(
               (identifier))))
         (type_name
           (identifier)))))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (annotation
-    (annotation_kv
-      (identifier)
-      (identifier))
-    (annotation_kv
-      (identifier)
-      (identifier)))
-  (body_item
-    (variable_declaration
-      (fn_definition
-        (identifier)
-        (param_list
-          (comment)
-          (param
-            (identifier)
-            (type_name
-              (identifier))))
-        (type_name
-          (identifier)))))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
-  (body_item
-    (comment))
   (body_item
     (comment))
   (annotation
