@@ -267,6 +267,21 @@ import "tests/inputs/cube.obj" as cube
 )
 
 ==================
+Named imports
+==================
+
+import Axis2d, Face from "std::types"
+
+---
+
+(kcl_program
+  (body_item
+    (import_stmt
+      (identifier)
+      (identifier)
+      (string))))
+
+==================
 String array in arg annotation
 ==================
 
@@ -381,6 +396,55 @@ fn circle(y?: number) {}
 )
 
 ==================
+Sized array types
+==================
+
+fn extrude(@sketches: [Sketch | [Segment; 1+]; 2+]) {}
+
+---
+
+(kcl_program
+  (body_item
+    (variable_declaration
+      (fn_definition
+        (identifier)
+        (param_list
+          (param
+            (identifier)
+            (type_name
+              (array_type
+                (type_name
+                  (identifier)
+                  (array_type
+                    (type_name
+                      (identifier))
+                    length: (number)))
+                length: (number)))))))))
+
+==================
+Function types
+==================
+
+fn pattern(transform: fn(number(Count)): {}) {}
+
+---
+
+(kcl_program
+  (body_item
+    (variable_declaration
+      (fn_definition
+        (identifier)
+        (param_list
+          (param
+            (identifier)
+            (type_name
+              (function_type
+                (type_name
+                  (identifier)
+                  units: (identifier))
+                (object_type)))))))))
+
+==================
 Function with optional
 ==================
 
@@ -402,6 +466,26 @@ fn circle(y?) {}
 		)
 	)
 )
+
+==================
+Single-quoted defaults
+==================
+
+fn sweep(relativeTo?: string = 'trajectoryCurve') {}
+
+---
+
+(kcl_program
+  (body_item
+    (variable_declaration
+      (fn_definition
+        (identifier)
+        (param_list
+          (param
+            (identifier)
+            (type_name
+              (identifier))
+            default: (string)))))))
 
 ==================
 Annotation

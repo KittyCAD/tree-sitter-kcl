@@ -40,7 +40,13 @@ module.exports = grammar({
 		shebang: (_) => /#![^\n]*/,
 
 		import_stmt: ($) =>
-			seq("import", $.string, optional(seq("as", $.identifier))),
+			seq(
+				"import",
+				choice(
+					seq($.string, optional(seq("as", $.identifier))),
+					seq(commaSep1($.identifier), "from", $.string),
+				),
+			),
 
 		expr_stmt: ($) => $._expr,
 
@@ -78,7 +84,25 @@ module.exports = grammar({
 		type_name: ($) => seq($._one_type, repeat(seq("|", $._one_type))),
 
 		_one_type: ($) =>
-			seq($.identifier, optional(seq("(", field("units", $.identifier), ")"))),
+			choice(
+				seq($.identifier, optional(seq("(", field("units", $.identifier), ")"))),
+				$.array_type,
+				$.function_type,
+				$.object_type,
+			),
+
+		array_type: ($) =>
+			seq(
+				"[",
+				$.type_name,
+				optional(seq(";", field("length", $.number), optional("+"))),
+				"]",
+			),
+
+		function_type: ($) =>
+			seq("fn", "(", commaSep($.type_name), ")", ":", $._one_type),
+
+		object_type: (_) => seq("{", "}"),
 
 		annotation: ($) =>
 			choice(
@@ -190,16 +214,24 @@ module.exports = grammar({
 
 		non_fn_definition: ($) => seq($.identifier, "=", $._expr),
 
-		string: ($) => choice(seq('"', '"'), seq('"', $._string_content, '"')),
+		string: ($) =>
+			choice(
+				seq('"', optional($._string_content), '"'),
+				seq("'", optional($._single_string_content), "'"),
+			),
 
 		boolean: (_) => choice("true", "false"),
 
 		_string_content: ($) =>
 			repeat1(choice($._normal_string_content, $.escape_sequence)),
+		_single_string_content: ($) =>
+			repeat1(choice($._normal_single_string_content, $.escape_sequence)),
 
 		_normal_string_content: (_) => token.immediate(prec(1, /[^\\"\n]+/)),
+		_normal_single_string_content: (_) => token.immediate(prec(1, /[^\\'\n]+/)),
 
-		escape_sequence: (_) => token.immediate(seq("\\", /("|\\|\/|b|f|n|r|t|u)/)),
+		escape_sequence: (_) =>
+			token.immediate(seq("\\", /("|'|\\|\/|b|f|n|r|t|u)/)),
 		prefix_expr: ($) =>
 			prec.right(
 				PREC.prefix,

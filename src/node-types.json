@@ -109,6 +109,32 @@
     }
   },
   {
+    "type": "array_type",
+    "named": true,
+    "fields": {
+      "length": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "type_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "binary_expr",
     "named": true,
     "fields": {
@@ -471,6 +497,48 @@
     }
   },
   {
+    "type": "function_type",
+    "named": true,
+    "fields": {
+      "units": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "object_type",
+          "named": true
+        },
+        {
+          "type": "type_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_expr",
     "named": true,
     "fields": {
@@ -788,6 +856,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "object_type",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "param",
@@ -1165,7 +1238,19 @@
       "required": true,
       "types": [
         {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "object_type",
           "named": true
         }
       ]
@@ -1203,11 +1288,19 @@
     "named": false
   },
   {
+    "type": "'",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
   {
     "type": ")",
+    "named": false
+  },
+  {
+    "type": "+",
     "named": false
   },
   {
@@ -1232,6 +1325,10 @@
   },
   {
     "type": ":",
+    "named": false
+  },
+  {
+    "type": ";",
     "named": false
   },
   {
@@ -1292,6 +1389,10 @@
   },
   {
     "type": "fn",
+    "named": false
+  },
+  {
+    "type": "from",
     "named": false
   },
   {
