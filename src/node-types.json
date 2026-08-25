@@ -27,6 +27,10 @@
       "required": true,
       "types": [
         {
+          "type": "array_expr",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },

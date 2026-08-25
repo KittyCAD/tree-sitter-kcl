@@ -94,7 +94,7 @@ module.exports = grammar({
 			seq(
 				$.identifier,
 				"=",
-				choice($.identifier, $.number, $.string),
+				choice($.identifier, $.number, $.string, $.array_expr),
 			),
 
 		identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
