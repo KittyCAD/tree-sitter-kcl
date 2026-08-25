@@ -444,3 +444,85 @@ fn planeOf(
 	)
 )
 
+==================
+Realistic subset of KCL stdlib
+==================
+
+/// Module docs here
+///
+/// A longer, more detailed description
+/// of the module goes here.
+
+@no_std
+@settings(defaultLengthUnit = mm, kclVersion = 2.0)
+
+/// Description goes here
+///
+/// ```kcl,norun
+/// result = "Straße"
+///   |> string::uppercase()
+///
+/// assertIs(result == "STRASSE")
+/// ```
+@(impl = std_rust, feature_tree = false)
+export fn fn_name(
+  /// A function docstring here
+  @text: string,
+): string {}
+
+---
+
+(kcl_program
+  (body_item
+    (comment))
+  (body_item
+    (comment))
+  (body_item
+    (comment))
+  (body_item
+    (comment))
+  (annotation
+    (identifier))
+  (annotation
+    (identifier)
+    (annotation_kv
+      (identifier)
+      (identifier))
+    (annotation_kv
+      (identifier)
+      (number)))
+  (body_item
+    (comment))
+  (body_item
+    (comment))
+  (body_item
+    (comment))
+  (body_item
+    (comment))
+  (body_item
+    (comment))
+  (body_item
+    (comment))
+  (body_item
+    (comment))
+  (body_item
+    (comment))
+  (annotation
+    (annotation_kv
+      (identifier)
+      (identifier))
+    (annotation_kv
+      (identifier)
+      (identifier)))
+  (body_item
+    (variable_declaration
+      (fn_definition
+        (identifier)
+        (param_list
+          (comment)
+          (param
+            (identifier)
+            (type_name
+              (identifier))))
+        (type_name
+          (identifier))))))
